@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="Learn Khmer through real Cambodian songs, kids songs and comedy clips!">
+<meta name="theme-color" content="#FFD600">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Talk Tuk Tuk">
+<title>Talk Tuk Tuk — Learn Basic Khmer Quickly!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --lang-primary: var(--yellow); }
+:root {
+  --yellow: #FFD600;
+  --red: #D32F2F;
+  --blue: #1565C0;
+  --pink: #FF1493;
+  --green: #2E7D32;
+  --purple: #6A1B9A;
+  --dark: #1a1a2e;
+  --muted: #555555;
+}
+html, body { font-family: 'Nunito', sans-serif; background: var(--dark); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+.app { max-width: 480px; margin: 0 auto; padding-bottom: 48px; }
+
+/* HEADER */
+.header { background: var(--yellow); padding: 18px 20px 14px; display: flex; align-items: center; gap: 12px; position: relative; }
+.header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--red), var(--pink), var(--blue), var(--red)); }
+.header-title { font-family: 'Fredoka One', cursive; font-size: 28px; color: var(--dark); line-height: 1; letter-spacing: 1px; }
+.header-sub { font-size: 11px; color: #444; font-weight: 700; margin-top: 3px; text-transform: uppercase; letter-spacing: 1.5px; }
+.mic-icon { width: 46px; height: 46px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+
+/* CHARITY BANNER */
+.charity-banner { background: var(--red); padding: 8px 16px; text-align: center; font-size: 11px; font-weight: 700; color: white; letter-spacing: 0.5px; }
+.charity-banner a { color: var(--yellow); text-decoration: none; }
+
+/* MAIN NAV */
+.main-nav { display: flex; margin: 14px 12px 0; gap: 6px; }
+.main-tab { flex: 1; background: rgba(255,255,255,0.08); border: none; border-radius: 10px; padding: 10px 4px; color: rgba(255,255,255,0.55); font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.3; }
+.main-tab.active { color: var(--dark); }
+.main-tab.t-khmer.active { background: var(--yellow); }
+.main-tab.t-kids.active { background: #69F0AE; }
+.main-tab.t-comedy.active { background: #FF80AB; }
+.main-tab.t-about.active { background: #80D8FF; }
+.main-nav .t-premium.active {
+  background: linear-gradient(135deg,#FFD700,#FFA500);
+  color: white; }
+/* SECTION PANELS */
+.panel { display: none; }
+.panel.visible { display: block; }
+
+/* SONG LIST */
+.song-list { margin: 12px 12px 0; display: flex; flex-direction: column; gap: 10px; }
+.song-item { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 3px 16px rgba(0,0,0,0.3); cursor: pointer; transition: transform 0.15s; }
+.song-item:active { transform: scale(0.98); }
+.song-item-header { display: flex; align-items: center; gap: 10px; padding: 14px 16px; }
+.song-badge { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Fredoka One', cursive; font-size: 16px; color: var(--dark); flex-shrink: 0; }
+.badge-khmer { background: var(--yellow); }
+.badge-kids { background: #69F0AE; }
+.badge-comedy { background: #FF80AB; }
+.song-info-title { font-family: 'Fredoka One', cursive; font-size: 16px; color: var(--dark); line-height: 1.2; }
+.song-info-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.song-arrow { margin-left: auto; font-size: 18px; color: #ccc; }
+
+/* PLAYER */
+.player-wrap { margin: 12px 12px 0; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.35); display: none; position: relative; }
+.player-wrap.visible { display: block; }
+.player-header { padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
+.player-header.khmer { background: var(--blue); }
+.player-header.kids { background: var(--green); }
+.player-header.comedy { background: var(--purple); }
+.player-back { background: rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.6); color: white; border-radius: 20px; padding: 10px 18px; font-size: 15px; font-weight: 700; cursor: pointer; flex-shrink: 0; }
+.player-title { font-family: 'Fredoka One', cursive; font-size: 17px; color: white; line-height: 1.2; }
+.player-artist { font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 2px; }
+.video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+.video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+.progress-bar-wrap { height: 5px; background: #eee; }
+.progress-bar { height: 100%; width: 0%; transition: width 0.5s linear; }
+.pb-khmer { background: linear-gradient(90deg, var(--blue), var(--pink)); }
+.pb-kids { background: linear-gradient(90deg, var(--green), #69F0AE); }
+.pb-comedy { background: linear-gradient(90deg, var(--purple), #FF80AB); }
+.controls { padding: 14px 18px 12px; display: flex; gap: 10px; align-items: center; }
+.btn-sing { flex: 1; color: white; border: none; border-radius: 30px; padding: 13px 20px; font-family: 'Fredoka One', cursive; font-size: 18px; cursor: pointer; letter-spacing: 1px; transition: transform 0.15s; -webkit-tap-highlight-color: transparent; }
+.btn-sing.khmer { background: var(--pink); }
+.btn-sing.kids { background: var(--green); }
+.btn-sing.comedy { background: var(--purple); }
+.btn-sing:active { transform: scale(0.97); }
+.btn-sing.playing { background: var(--red) !important; }
+.btn-reset { background: #f0f0f0; color: var(--dark); border: none; border-radius: 30px; padding: 13px 24px; font-size: 22px; font-weight: 700; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.lyrics-section { padding: 14px 18px 20px; max-height: 320px; overflow-y: auto; scroll-behavior: smooth; }
+.lyrics-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 10px; }
+.lyric-line { padding: 6px 14px; border-radius: 10px; margin-bottom: 4px; transition: background 0.3s, transform 0.2s; line-height: 1.2; }
+.lyric-line.active { background: var(--yellow); transform: scale(1.02); }
+.lyric-line.sung { opacity: 0.4; }
+
+/* COMING SOON */
+.coming-soon-card { margin: 12px 12px 0; background: white; border-radius: 16px; padding: 28px 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.35); text-align: center; }
+.coming-soon-card .big { font-size: 52px; line-height: 1; margin-bottom: 12px; }
+.coming-soon-card h2 { font-family: 'Fredoka One', cursive; font-size: 22px; color: var(--purple); margin-bottom: 8px; }
+.coming-soon-card p { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+/* ABOUT */
+.about-card { margin: 12px 12px 0; background: white; border-radius: 16px; padding: 22px 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.35); }
+.about-title { font-family: 'Fredoka One', cursive; font-size: 24px; color: var(--blue); margin-bottom: 10px; }
+.about-text { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+.giving-badge { background: var(--red); color: white; border-radius: 12px; padding: 14px 16px; text-align: center; font-weight: 700; font-size: 14px; margin-bottom: 18px; }
+.giving-badge .pct { color: var(--yellow); font-size: 36px; font-family: 'Fredoka One', cursive; display: block; line-height: 1.1; }
+.section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 10px; }
+.charity-list { list-style: none; }
+.charity-list li { padding: 12px 14px; border-left: 4px solid var(--yellow); background: #fffde7; border-radius: 0 10px 10px 0; margin-bottom: 8px; }
+.charity-list li strong { color: var(--dark); display: block; font-size: 14px; margin-bottom: 3px; }
+.charity-list li p { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 4px; }
+.charity-list li a { color: var(--blue); font-size: 12px; font-weight: 700; text-decoration: none; }
+
+.donate-wrap { margin: 16px 12px 0; text-align: center; }
+.btn-donate { display: inline-block; background: var(--yellow); color: var(--dark); font-family: "Fredoka One", cursive; font-size: 18px; padding: 14px 32px; border-radius: 30px; text-decoration: none; letter-spacing: 1px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: transform 0.15s; }
+.btn-donate:active { transform: scale(0.97); }
+.donate-note { font-size: 13px; font-weight: 800; color: white; margin-top: 8px; }
+.lang-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--dark); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.lang-box { background: white; border-radius: 20px; padding: 30px 24px; max-width: 400px; width: 100%; text-align: center; }
+.lang-box h2 { font-family: "Fredoka One", cursive; font-size: 26px; color: var(--dark); margin-bottom: 8px; }
+.lang-box p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+.lang-btn { display: block; width: 100%; padding: 16px; border: none; border-radius: 14px; font-family: "Fredoka One", cursive; font-size: 20px; cursor: pointer; margin-bottom: 12px; transition: transform 0.15s; }
+.lang-btn:active { transform: scale(0.97); }
+.lang-btn-khmer { background: var(--yellow); color: var(--dark); }
+.lang-btn-english { background: var(--blue); color: white; }
+.lang-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border-radius: 20px; padding: 6px 14px; margin: 10px 12px 0; cursor: pointer; }
+.lang-badge span { font-size: 12px; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 1px; }
+.lang-badge .flag { font-size: 18px; }
+.lyric-line .khmer { font-size: 14px; font-weight: 700; color: var(--dark); line-height: 1.2; display: block; }
+.lyric-line .english { font-size: 12px; font-weight: 400; color: var(--muted); line-height: 1.2; display: block; }
+.lyric-line .meaning { font-size: 10px; color: #aaa; line-height: 1.2; display: block; font-style: italic; }
+.lyric-line.active .khmer { color: var(--dark); }
+.lyric-line.active .english { color: #555; }
+.lyric-line.active .meaning { color: #666; }
+.countdown-overlay { display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 10; align-items: center; justify-content: center; border-radius: 16px; }
+.countdown-overlay.active { display: flex; }
+.countdown-number { font-family: "Fredoka One", cursive; font-size: 80px; color: white; text-align: center; line-height: 1; }
+.countdown-text { font-size: 16px; color: rgba(255,255,255,0.7); margin-top: 8px; text-align: center; }
+.quiz-card { margin: 14px 12px 0; background: white; border-radius: 16px; padding: 22px 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.35); }
+.quiz-progress { height: 6px; background: #eee; border-radius: 6px; margin-bottom: 18px; overflow: hidden; }
+.quiz-progress-bar { height: 100%; background: linear-gradient(90deg, var(--blue), var(--pink)); border-radius: 6px; transition: width 0.4s; }
+.quiz-category { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 8px; }
+.quiz-question { font-family: "Fredoka One", cursive; font-size: 22px; color: var(--dark); margin-bottom: 6px; line-height: 1.3; }
+.quiz-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; font-style: italic; }
+.quiz-options { display: flex; flex-direction: column; gap: 10px; }
+.quiz-opt { background: #f5f5f5; border: 2px solid #eee; border-radius: 12px; padding: 14px 16px; font-size: 15px; font-weight: 700; color: var(--dark); cursor: pointer; transition: all 0.2s; text-align: left; -webkit-tap-highlight-color: transparent; }
+.quiz-opt:active { transform: scale(0.98); }
+.quiz-opt.correct { background: #E8F5E9; border-color: #4CAF50; color: #2E7D32; }
+.quiz-opt.wrong { background: #FFEBEE; border-color: #F44336; color: #C62828; }
+.quiz-opt.reveal { background: #E8F5E9; border-color: #4CAF50; color: #2E7D32; }
+.quiz-opt.disabled { cursor: default; }
+.quiz-score-card { margin: 14px 12px 0; background: white; border-radius: 16px; padding: 30px 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.35); text-align: center; }
+.quiz-score-big { font-family: "Fredoka One", cursive; font-size: 56px; color: var(--blue); line-height: 1; }
+.quiz-score-label { font-size: 15px; font-weight: 700; color: var(--dark); margin-top: 10px; margin-bottom: 20px; line-height: 1.4; }
+.quiz-start-card { margin: 14px 12px 0; background: white; border-radius: 16px; padding: 28px 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.35); text-align: center; }
+.quiz-cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+.quiz-cat-btn { background: #f5f5f5; border: 2px solid #eee; border-radius: 12px; padding: 14px 10px; font-size: 13px; font-weight: 700; color: var(--dark); cursor: pointer; transition: all 0.15s; }
+.quiz-cat-btn:active { transform: scale(0.97); }
+.quiz-cat-btn.selected { border-color: var(--blue); background: #E3F2FD; color: var(--blue); }
+.btn-quiz-start { background: var(--pink); color: white; border: none; border-radius: 30px; padding: 14px 32px; font-family: "Fredoka One", cursive; font-size: 20px; cursor: pointer; margin-top: 20px; width: 100%; }
+.loading-screen { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--dark); z-index: 2000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
+.loading-spinner { width: 48px; height: 48px; border: 4px solid rgba(255,255,255,0.1); border-top-color: var(--yellow); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { color: white; font-family: "Fredoka One", cursive; font-size: 18px; }
+.footer { text-align: center; margin-top: 28px; font-size: 11px; color: rgba(255,255,255,0.3); }
+</style>
+<script src="https://www.youtube.com/iframe_api"></script>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KKP91BN4J8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KKP91BN4J8');
+</script>
+</head>
+<body>
+<div id="loading-screen" class="loading-screen">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Loading Talk Tuk Tuk...</div>
+</div>
+
+<div id="lang-overlay" class="lang-overlay">
+  <div class="lang-box">
+    <div style="text-align:center;margin-bottom:12px;">
+      <img src="https://raw.githubusercontent.com/Mickalacki/talktuktuk/main/NEW_TTT_LOGO.png" style="width:110px;height:110px;border-radius:50%;object-fit:cover;" alt="Talk Tuk Tuk">
+    </div>
+    <h2>Talk Tuk Tuk</h2>
+    <p>What would you like to learn today?</p>
+    <button class="lang-btn lang-btn-khmer" onclick="setLang('khmer')"> I want to learn Khmer</button>
+    <button class="lang-btn lang-btn-english" onclick="setLang('english')"> I want to learn English</button>
+  </div>
+</div>
+
+<div class="app">
+
+<div class="header">
+
+  <!-- LEFT: LOGO -->
+  <img src="https://raw.githubusercontent.com/Mickalacki/talktuktuk/main/NEW_TTT_LOGO.png" 
+       style="width:70px;height:70px;border-radius:50%;object-fit:cover;flex-shrink:0;" 
+       alt="Talk Tuk Tuk">
+
+  <!-- CENTER: TITLE -->
+  <div style="flex:1;text-align:center;">
+    <div class="header-title">TALK TUK TUK</div>
+    <div class="header-sub">Learn Basic Khmer Quickly!</div>
+  </div>
+
+  <!-- RIGHT: KHMER FLAG -->
+  <img src="KHMER-FLAG-LOGO.png" 
+      style="width:50px;height:36px;object-fit:cover;border-radius:4px;flex-shrink:0;" 
+       alt="Khmer Flag">
+
+</div>
+
+  <div class="charity-banner">
+    20% of app profits support Cambodian charities &mdash;
+    <a href="#" onclick="showMain('about'); return false;">Find out more</a>
+  </div>
+
+
+  <div class="lang-badge" onclick="document.getElementById('lang-overlay').style.display='flex'">
+    <span id="lang-flag" class="flag">🇰🇭</span>
+    <span id="lang-label">Learning Khmer</span>
+    <span style="color:rgba(255,255,255,0.5);font-size:11px;">▼</span>
+  </div>
+
+  <div class="main-nav">
+    <button class="main-tab t-khmer active" id="mtab-phrases" onclick="showMain('phrases')">🗣️<br>Phrases</button>
+    <button class="main-tab t-kids" id="mtab-quiz" onclick="showMain('quiz')">🎯<br>Quiz</button>
+    <button class="main-tab t-premium" id="mtab-premium" onclick="showMain('premium')">⭐<br>Premium</button>
+    <button class="main-tab t-about" id="mtab-about" onclick="showMain('about')">❤️<br>About</button>
+  </div>
+
+  <!-- KHMER SONGS HIDDEN -->
+  <div class="panel" id="panel-khmer" style="display:none;">
+    <div class="song-list" id="khmer-list">
+      <div class="song-item" onclick="openPlayer('khmer', 0)">
+        <div class="song-item-header">
+          <div class="song-badge badge-khmer">1</div>
+          <div>
+            <div class="song-info-title">Heang — ហែង</div>
+            <div class="song-info-sub">Traditional Cambodian Song</div>
+          </div>
+          <div class="song-arrow">▶</div>
+        </div>
+      </div>
+    </div>
+    <div class="player-wrap" id="khmer-player">
+      <div class="player-header khmer">
+        <button class="player-back" onclick="goToList('khmer')">← Songs</button><button class="player-back" onclick="closePlayer('khmer')" style="margin-left:6px;">↺ Restart</button>
+        <div>
+          <div class="player-title" id="khmer-player-title"></div>
+          <div class="player-artist" id="khmer-player-artist"></div>
+        </div>
+      </div>
+      <div class="video-wrap"><iframe id="khmer-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="progress-bar-wrap"><div class="progress-bar pb-khmer" id="khmer-progress"></div></div>
+      <div class="controls">
+        <button class="btn-sing khmer" id="khmer-btn" onclick="toggleSing('khmer')">▶ Sing Along!</button>
+        
+      </div>
+      <div class="lyrics-section">
+        <div class="lyrics-label">Lyrics &amp; Meaning</div>
+        <div id="khmer-lyrics"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KIDS SONGS -->
+  <div class="panel" id="panel-kids">
+    <div class="song-list" id="kids-list">
+      <div class="song-item" onclick="openPlayer('kids', 0)">
+        <div class="song-item-header">
+          <div class="song-badge badge-kids">1</div>
+          <div>
+            <div class="song-info-title">Twinkle Twinkle Little Star</div>
+            <div class="song-info-sub">ពន្លឺផ្កាយតូច · Beginner</div>
+          </div>
+          <div class="song-arrow">▶</div>
+        </div>
+      </div>
+      <div class="song-item" onclick="openPlayer('kids', 1)">
+        <div class="song-item-header">
+          <div class="song-badge badge-kids">2</div>
+          <div>
+            <div class="song-info-title">My Grandpa's Farm</div>
+            <div class="song-info-sub">Khmer Old MacDonald · Beginner</div>
+          </div>
+          <div class="song-arrow">▶</div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="player-wrap" id="kids-player">
+      <div class="player-header kids">
+        <button class="player-back" onclick="goToList('kids')">← Songs</button><button class="player-back" onclick="closePlayer('kids')" style="margin-left:6px;">↺ Restart</button>
+        <div>
+          <div class="player-title" id="kids-player-title"></div>
+          <div class="player-artist" id="kids-player-artist"></div>
+        </div>
+      </div>
+      <div class="video-wrap" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><div id="kids-yt-player" style="position:absolute;top:0;left:0;width:100%;height:100%;"></div></div>
+      <div class="progress-bar-wrap"><div class="progress-bar pb-kids" id="kids-progress"></div></div>
+      <div class="controls">
+        <button class="btn-sing kids" id="kids-btn" onclick="toggleSingKids()">▶ Sing Along!</button>
+        
+      </div>
+      <div class="lyrics-section">
+        <div class="lyrics-label">Lyrics &amp; Meaning</div>
+        <div id="kids-lyrics"></div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- PHRASES -->
+  <div class="panel visible" id="panel-phrases">
+
+    <!-- CATEGORY LIST -->
+    <div id="phrases-categories">
+      <div class="song-list">
+        <div class="song-item" onclick="openCategory('greetings')">
+          <div class="song-item-header">
+            <div class="song-badge badge-kids" style="background:#FFD600;font-size:22px;width:44px;height:44px;">👋</div>
+            <div>
+              <div class="song-info-title">Start &amp; Simple Talk</div><div style="font-size:11px;color:#888;margin-top:1px;">ការនិយាយសាមញ្ញៗ</div>
+              <div class="song-info-sub"><span id="cat-sub-greetings">7 phrases · Hello, Thank you, Sorry...</span></div>
+            </div>
+            <div class="song-arrow">▶</div>
+          </div>
+        </div>
+        <div class="song-item" onclick="openCategory('food')">
+          <div class="song-item-header">
+            <div class="song-badge badge-kids" style="background:#FF8F00;font-size:22px;width:44px;height:44px;">🍜</div>
+            <div>
+              <div class="song-info-title">Food &amp; Drink</div><div style="font-size:11px;color:#888;margin-top:1px;">ម្ហូប និងភេសជ្ជៈ</div>
+              <div class="song-info-sub"><span id="cat-sub-food">9 phrases · Water, Beer, Delicious...</span></div>
+            </div>
+            <div class="song-arrow">▶</div>
+          </div>
+        </div>
+        <div class="song-item" onclick="openCategory('transport')">
+          <div class="song-item-header">
+            <div class="song-badge badge-kids" style="background:#1565C0;font-size:22px;width:44px;height:44px;">🛺</div>
+            <div>
+              <div class="song-info-title">Getting Around</div><div style="font-size:11px;color:#888;margin-top:1px;">ការធ្វើដំណើរ</div>
+              <div class="song-info-sub"><span id="cat-sub-transport">6 phrases · Turn left, Stop here...</span></div>
+            </div>
+            <div class="song-arrow">▶</div>
+          </div>
+        </div>
+        <div class="song-item" onclick="openCategory('social')">
+          <div class="song-item-header">
+            <div class="song-badge badge-kids" style="background:#2E7D32;font-size:22px;width:44px;height:44px;">🤝</div>
+            <div>
+              <div class="song-info-title">Social</div><div style="font-size:11px;color:#888;margin-top:1px;">សង្គម</div>
+              <div class="song-info-sub"><span id="cat-sub-social">5 phrases · What is your name...</span></div>
+            </div>
+            <div class="song-arrow">▶</div>
+          </div>
+        </div>
+        <div class="song-item" onclick="openCategory('numbers')">
+          <div class="song-item-header">
+            <div class="song-badge badge-kids" style="background:#6A1B9A;font-size:22px;width:44px;height:44px;">🔢</div>
+            <div>
+              <div class="song-info-title">Numbers</div><div style="font-size:11px;color:#888;margin-top:1px;">លេខ</div>
+              <div class="song-info-sub"><span id="cat-sub-numbers">10 phrases · 1 through 10</span></div>
+            </div>
+            <div class="song-arrow">▶</div>
+          </div>
+        </div>
+        <div class="song-item" onclick="openCategory('days')">
+          <div class="song-item-header">
+            <div class="song-badge badge-kids" style="background:#00838F;font-size:22px;width:44px;height:44px;">📅</div>
+            <div>
+              <div class="song-info-title">Days</div><div style="font-size:11px;color:#888;margin-top:1px;">ថ្ងៃក្នុងសប្តាហ៍</div>
+              <div class="song-info-sub"><span id="cat-sub-days">8 phrases · Monday to Sunday</span></div>
+            </div>
+            <div class="song-arrow">▶</div>
+          </div>
+        </div>
+        <div class="song-item" onclick="openCategory('funphrases')">
+          <div class="song-item-header">
+            <div class="song-badge badge-kids" style="background:#AD1457;font-size:22px;width:44px;height:44px;">😄</div>
+            <div>
+              <div class="song-info-title">Fun Phrases</div><div style="font-size:11px;color:#888;margin-top:1px;">ពណ៌</div>
+              <div class="song-info-sub"><span id="cat-sub-colours">10 phrases · Just joking, Wait a little, You're funny...</span></div>
+            </div>
+            <div class="song-arrow">▶</div>
+          </div>
+        </div>
+        <div class="song-item" onclick="openKidsSongs()" style="display:none;">
+          <div class="song-item-header">
+            <div class="song-badge badge-kids" style="background:#4CAF50;font-size:22px;width:44px;height:44px;">👶</div>
+            <div>
+              <div class="song-info-title">Kids Songs</div><div style="font-size:11px;color:#888;margin-top:1px;">ចំរៀងកុមារ</div>
+              <div class="song-info-sub">2 songs · Sing along in Khmer</div>
+            </div>
+            <div class="song-arrow">▶</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHRASE LIST (shown when category selected) -->
+    <div id="phrases-list" style="display:none;">
+      <div class="song-list" id="phrase-cards"></div>
+    </div>
+
+    <!-- PHRASE PLAYER (shown when phrase selected) -->
+    <div id="phrase-player" style="display:none;">
+      <div style="margin:12px 12px 0;background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.35);">
+        <div class="player-header kids" style="display:flex;align-items:center;gap:8px;padding:12px 16px;">
+          <button class="player-back" onclick="closePhrasePlayer()">← Back</button>
+          <div>
+            <div class="player-title" id="phrase-player-title"></div>
+          </div>
+        </div>
+        <video id="phrase-video" controls playsinline style="width:100%;display:block;background:#000;" preload="auto">
+          <source id="phrase-video-src" src="" type="video/mp4">
+        </video>
+        <div style="padding:16px 18px 20px;">
+          <div style="font-family:'Fredoka One',cursive;font-size:28px;color:#1565C0;margin-bottom:6px;" id="phrase-khmer"></div>
+          <div style="font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:4px;" id="phrase-english"></div>
+          <div style="font-size:13px;color:#555;font-style:italic;" id="phrase-phonetic"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- QUIZ -->
+  <div class="panel" id="panel-quiz">
+
+    <!-- START SCREEN -->
+    <div id="quiz-start">
+      <div class="quiz-start-card">
+        <div style="font-size:48px;margin-bottom:10px;">🎯</div>
+        <div style="font-family:Fredoka One,cursive;font-size:24px;color:var(--blue);margin-bottom:8px;">Khmer Quiz</div>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:16px;">Test your Khmer knowledge! Pick a category or go for the mixed challenge.</p>
+        <div class="quiz-cat-grid" id="quiz-cat-grid">
+          <button class="quiz-cat-btn selected" data-cat="all" onclick="selectQuizCat(this)">🌟 All Categories</button>
+          <button class="quiz-cat-btn" data-cat="greetings" onclick="selectQuizCat(this)">👋 Greetings</button>
+          <button class="quiz-cat-btn" data-cat="food" onclick="selectQuizCat(this)">🍜 Food & Drink</button>
+          <button class="quiz-cat-btn" data-cat="transport" onclick="selectQuizCat(this)">🛺 Getting Around</button>
+          <button class="quiz-cat-btn" data-cat="social" onclick="selectQuizCat(this)">🤝 Social</button>
+          <button class="quiz-cat-btn" data-cat="numbers" onclick="selectQuizCat(this)">🔢 Numbers</button>
+          <button class="quiz-cat-btn" data-cat="days" onclick="selectQuizCat(this)">📅 Days</button>
+          <button class="quiz-cat-btn" data-cat="funphrases" onclick="selectQuizCat(this)">😄 Fun Phrases</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- QUESTION SCREEN -->
+    <div id="quiz-question" style="display:none;">
+      <div class="quiz-card">
+        <div class="quiz-progress"><div class="quiz-progress-bar" id="quiz-progress-bar"></div></div>
+        <div class="quiz-category" id="quiz-q-num"></div>
+        <div class="quiz-question" id="quiz-q-text"></div>
+        <div class="quiz-sub" id="quiz-q-sub"></div>
+        <div class="quiz-options" id="quiz-options"></div>
+        <div style="text-align:center;margin-top:16px;display:none;" id="quiz-next-wrap">
+          <button onclick="nextQuestion()" style="background:var(--blue);color:white;border:none;border-radius:30px;padding:12px 32px;font-family:Fredoka One,cursive;font-size:18px;cursor:pointer;">Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCORE SCREEN -->
+    <div id="quiz-score" style="display:none;">
+      <div class="quiz-score-card">
+        <div id="quiz-score-emoji" style="font-size:52px;margin-bottom:8px;">🎉</div>
+        <div class="quiz-score-big" id="quiz-score-num"></div>
+        <div class="quiz-score-label" id="quiz-score-label"></div>
+        <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;">
+          <button onclick="restartQuiz()" style="background:var(--pink);color:white;border:none;border-radius:30px;padding:12px 24px;font-family:Fredoka One,cursive;font-size:16px;cursor:pointer;">Try Again!</button>
+          <button onclick="showMain('quiz')" style="background:#eee;color:var(--dark);border:none;border-radius:30px;padding:12px 24px;font-family:Fredoka One,cursive;font-size:16px;cursor:pointer;">Change Category</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<div class="panel" id="panel-premium">
+  <div style="margin:14px 12px 0;background:white;border-radius:16px;padding:36px 18px;text-align:center;">
+
+    <div style="font-size:56px;margin-bottom:16px;">
+      ⭐
+    </div>
+
+    <div style="font-family:Fredoka One,cursive;font-size:28px;color:#B8860B;margin-bottom:12px;">
+      Premium
+    </div>
+
+    <div style="font-size:15px;color:#555;line-height:1.7;margin-bottom:24px;">
+      More phrases, audio and quizzes coming soon.
+      <br><br>
+      Learn Khmer faster with premium visual lessons and extra quiz pack
+
+</div>
+    <div style="background:#FFF8DC;padding:14px;border-radius:12px;font-size:14px;color:#444;">
+  <!-- START: $4.99 Upgrade Box (Classy Icons) -->
+<div style="background: #fcf8e3; border-radius: 12px; padding: 22px; text-align: center; margin: 20px 0; font-family: sans-serif; color: #333;">
+  
+  <h3 style="margin-top: 0; color: #b58500; font-size: 1.4rem; font-weight: 700; letter-spacing: -0.3px;">Love the Free Version?</h3>
+  <p style="margin: 4px 0 16px 0; font-size: 0.95rem; color: #4a4a4a;">Your 70 phrases & practice quiz are <strong>free for life</strong></p>
+  
+  <div style="border-top: 1px solid #e2d9b7; border-bottom: 1px solid #e2d9b7; padding: 12px 0; margin: 12px 0;">
+    <p style="font-size: 1.3rem; font-weight: 800; margin: 0; color: #1a1a2e;">Unlock Full App for $4.99</p>
+    <p style="color: #666; font-size: 0.82rem; margin: 2px 0 0 0; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">One-Time Payment • No Subscriptions</p>
+  </div>
+  
+  <ul style="text-align: left; display: inline-block; margin: 12px 0 18px 0; list-style: none; padding-left: 0; font-size: 0.92rem; line-height: 1.8;">
+    <li style="margin-bottom: 6px;"><span style="color: #27ae60; font-size: 0.85rem; margin-right: 8px;">✓</span> <strong>70 FREE</strong> phrases + <strong>160 Premium</strong> phrases</li>
+    <li style="margin-bottom: 6px;"><span style="color: #b58500; font-size: 0.85rem; margin-right: 8px;">◈</span> One-time payment — <strong>lifetime access</strong></li>
+    <li style="margin-bottom: 6px;"><span style="color: #b58500; font-size: 0.85rem; margin-right: 8px;">❖</span> Full Quiz access included</li>
+    <li style="margin-bottom: 6px;"><span style="color: #b58500; font-size: 0.85rem; margin-right: 8px;">✦</span> <strong>FREE Audio Quiz</strong> upgrade when launched</li>
+  </ul>
+  <br>
+
+  <!-- BUTTON PLACEHOLDER -->
+  <a href="REPLACE_WITH_PARTNERS_LINK" target="_blank" style="background: #ffd500; color: #1a1a2e; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1.05rem; display: inline-block; margin-top: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); letter-spacing: 0.2px;">
+    Unlock Lifetime Access ($4.99)
+  </a>
+
+</div>
+<!-- END: $4.99 Upgrade Box -->   
+  
+  
+    </div>
+
+  </div>
+</div>
+  <!-- ABOUT -->
+
+  <div class="panel" id="panel-about">
+    <div class="about-card">
+      <div style="text-align:center;margin-bottom:16px;">
+        <img src="https://raw.githubusercontent.com/Mickalacki/talktuktuk/main/NEW_TTT_LOGO.png" style="width:100px;height:100px;border-radius:50%;object-fit:cover;" alt="Talk Tuk Tuk">
+      </div>
+      <div class="about-title" style="text-align:center;">
+  About Talk Tuk Tuk
+</div>
+      <p class="about-text">Talk Tuk Tuk helps tourists, expats and Cambodians connect through language. Learn basic Khmer phrases quickly — or practise your English — with short video clips of real words and phrases used every day in Cambodia.</p>
+      <p class="about-text">No boring lessons. No textbooks. Just pick a category, watch a short clip, and start talking. Whether you're haggling at the market, ordering food, or just want to make your tuk tuk driver smile — Talk Tuk Tuk has you covered.</p>
+      <div class="giving-badge">
+        <span class="pct">20%</span>
+        of app profits go directly to Cambodian charities
+      </div>
+      <div class="donate-wrap" style="margin: 0 0 18px;">
+        <a class="btn-donate" href="PAYPAL_LINK_HERE" target="_blank">❤️ Donate Now</a>
+        <div class="donate-note" style="color:#888;">Every dollar helps Cambodian children and families</div>
+      </div>
+      <div class="section-label">Our Charity Partners</div>
+      <ul class="charity-list">
+        <li>
+          <strong>Kantha Bopha Children's Hospitals</strong>
+          <p>Providing free healthcare to children across Cambodia. Founded by the late Dr Beat Richner, treating thousands of children every year regardless of ability to pay.</p>
+          <a href="https://www.beat-richner.ch" target="_blank">beat-richner.ch ↗</a>
+        </li>
+        <li>
+          <strong>Caritas Cambodia</strong>
+          <p>Supporting displaced families and vulnerable communities across 12 Cambodian provinces, with work in emergency relief, anti-trafficking, and poverty reduction.</p>
+          <a href="https://www.caritascambodia.org" target="_blank">caritascambodia.org ↗</a>
+        </li>
+        <li>
+          <strong>Sunshine School Cambodia</strong>
+          <p>Founded by Han, a university student who started teaching 6 children under her mother's house. She now provides free English lessons and a daily meal to over 150 children in Siem Reap.</p>
+          <a href="https://www.facebook.com/SunshineSchoolCambodia" target="_blank">facebook.com/SunshineSchoolCambodia ↗</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">&copy; 2026 Talk Tuk Tuk &nbsp;|&nbsp; Made with ❤️ in Siem Reap, Cambodia</div>
+
+</div>
+
+<script>
+var songs = {
+  khmer: [
+    {
+      title: "Heang — ហែង",
+      artist: "Traditional Cambodian Song",
+      ytid: "OAXimBfuVOw",
+      lyrics: [
+        { english: "Oh my darling, where are you going?", meaning: "A classic opening of longing" },
+        { english: "The river flows but you don't return", meaning: "Images of nature reflect the heart" },
+        { english: "I wait by the lotus pond each evening", meaning: "Lotus — Cambodia's sacred flower" },
+        { english: "Your laughter still echoes in these fields", meaning: "Memory lives in the landscape" },
+        { english: "Heang, Heang — I call your name softly", meaning: "\"Heang\" means to float or drift" },
+        { english: "The moonlight keeps me company tonight", meaning: "The moon is a witness to love" },
+        { english: "Come back to me before the rains return", meaning: "Rainy season marks the passing year" },
+        { english: "My heart is a boat without a paddle", meaning: "A common Khmer metaphor for loss" },
+        { english: "Heang, Heang — the stars remember you", meaning: "Stars carry messages in Khmer folklore" },
+        { english: "One day the river will bring you home", meaning: "Rivers connect people across Cambodia" }
+      ]
+    }
+  ],
+  kids: [
+    {
+      title: "Twinkle Twinkle Little Star",
+      artist: "ពន្លឺផ្កាយតូច · Khmer Version",
+      ytid: "8EoFayAcxUY",
+      ytstart: 0,
+      lyrics: [
+        { khmer: "ពន្លឺ ពន្លឺ ផ្កាយតូច", english: "Twinkle twinkle little star", meaning: "ផ្កាយ = Pkay · Star", t: 0 },
+        { khmer: "ខ្ញុំចង់ដឹងថាអ្នកជាអ្វី", english: "How I wonder what you are", meaning: "មេឃ = Mek · Sky", t: 6 },
+        { khmer: "នៅខ្ពស់ពីលើពិភពលោក", english: "Up above the world so high", meaning: "ខ្ពស់ = Kpoh · High", t: 11 },
+        { khmer: "ដូចជាពេជ្រនៅលើមេឃ", english: "Like a diamond in the sky", meaning: "ពេជ្រ = Pech · Diamond", t: 16 },
+        { khmer: "ពន្លឺ ពន្លឺ ផ្កាយតូច", english: "Twinkle twinkle little star", meaning: "ពន្លឺ = Ponleu · Twinkle", t: 22 },
+        { khmer: "ខ្ញុំចង់ដឹងថាអ្នកជាអ្វី", english: "How I wonder what you are", meaning: "តូច = Toch · Little", t: 26 }
+      ]
+    },
+    {
+      title: "My Grandpa's Farm",
+      artist: "Khmer Version of Old MacDonald",
+      ytid: "k_JHqAfqoSs",
+      ytstart: 0,
+      lyrics: [
+        { khmer: "ជីតាខ្ញុំ មានផ្ទះនៅស្រែ", english: "My grandpa has a house by the rice field", meaning: "ជីតា = Chida · Grandpa", t: 0 },
+        { khmer: "នៅស្រែ គាត់ចិញ្ចឹមមាន់", english: "By the rice field he raises chickens", meaning: "មាន់ = Moan · Chicken", t: 7 },
+        { khmer: "ក្អែក ក្អែក នៅទីនេះ ក្អែក ក្អែក នៅទីនោះ", english: "With a cluck-cluck here and a cluck-cluck there", meaning: "ក្អែក = Kawk · Cluck", t: 13 },
+        { khmer: "ទីនេះ ក្អែក ទីនោះ ក្អែក", english: "Here a cluck, there a cluck", meaning: "ទីនេះ = Ti nih · Here", t: 17 },
+        { khmer: "គ្រប់ទីកន្លែង ក្អែក ក្អែក", english: "Everywhere a cluck-cluck", meaning: "គ្រប់ = Krop · Every", t: 20 },
+        { khmer: "ជីតាខ្ញុំ មានផ្ទះនៅស្រែ", english: "My grandpa has a house by the rice field", meaning: "ស្រែ = Srae · Rice field", t: 22 },
+        { khmer: "នៅស្រែ គាត់ចិញ្ចឹមទា", english: "By the rice field he raises ducks", meaning: "ទា = Tea · Duck", t: 29 },
+        { khmer: "កាប កាប នៅទីនេះ កាប កាប នៅទីនោះ", english: "With a quack-quack here and a quack-quack there", meaning: "កាប = Kap · Quack", t: 36 },
+        { khmer: "ទីនេះ កាប ទីនោះ កាប", english: "Here a quack, there a quack", meaning: "ទីនោះ = Ti nuh · There", t: 39 },
+        { khmer: "គ្រប់ទីកន្លែង កាប កាប", english: "Everywhere a quack-quack", meaning: "ទីកន្លែង = Ti konlaeng · Place", t: 42 },
+        { khmer: "ជីតាខ្ញុំ មានផ្ទះនៅស្រែ", english: "My grandpa has a house by the rice field", meaning: "ផ្ទះ = Pteah · House", t: 44 },
+        { khmer: "នៅស្រែ គាត់ចិញ្ចឹមគោ", english: "By the rice field he raises cows", meaning: "គោ = Ko · Cow", t: 51 },
+        { khmer: "មូ មូ នៅទីនេះ មូ មូ នៅទីនោះ", english: "With a moo-moo here and a moo-moo there", meaning: "មូ = Moo · Cow sound", t: 58 },
+        { khmer: "ទីនេះ មូ ទីនោះ មូ", english: "Here a moo, there a moo", meaning: "ទីនេះ = Ti nih · Here", t: 62 },
+        { khmer: "គ្រប់ទីកន្លែង មូ មូ", english: "Everywhere a moo-moo", meaning: "គ្រប់ = Krop · Every", t: 64 },
+        { khmer: "ជីតាខ្ញុំ មានផ្ទះនៅស្រែ", english: "My grandpa has a house by the rice field", meaning: "ជីតា = Chida · Grandpa", t: 67 }
+      ]
+    },
+    {
+      title: "Numbers 1 to 10",
+      artist: "ចំនួន ១ ដល់ ១០ · Khmer Numbers",
+      ytid: "V-rHNp3Z154",
+      ytstart: 0,
+      lyrics: [
+        { khmer: "១ — មួយ", english: "One", meaning: "muoy = One", t: 0 },
+        { khmer: "២ — ពីរ", english: "Two", meaning: "pii = Two", t: 5 },
+        { khmer: "៣ — បី", english: "Three", meaning: "bei = Three", t: 10 },
+        { khmer: "៤ — បួន", english: "Four", meaning: "buon = Four", t: 15 },
+        { khmer: "៥ — ប្រាំ", english: "Five", meaning: "pram = Five", t: 20 },
+        { khmer: "៦ — ប្រាំមួយ", english: "Six", meaning: "pram muoy = Six", t: 26 },
+        { khmer: "៧ — ប្រាំពីរ", english: "Seven", meaning: "pram pii = Seven", t: 31 },
+        { khmer: "៨ — ប្រាំបី", english: "Eight", meaning: "pram bei = Eight", t: 36 },
+        { khmer: "៩ — ប្រាំបួន", english: "Nine", meaning: "pram buon = Nine", t: 41 },
+        { khmer: "១០ — ដប់", english: "Ten", meaning: "dop = Ten", t: 47 }
+      ]
+    },
+    {
+      title: "Days of the Week",
+      artist: "ថ្ងៃក្នុងសប្តាហ៍ · Khmer Days",
+      ytid: "Znr2Tn4Xlnk",
+      ytstart: 0,
+      lyrics: [
+        { khmer: "ថ្ងៃ", english: "Day", meaning: "Tngai = Day", t: 0 },
+        { khmer: "ថ្ងៃចន្ទ", english: "Monday", meaning: "Tngai Chan = Monday", t: 5 },
+        { khmer: "ថ្ងៃអង្គារ", english: "Tuesday", meaning: "Tngai Angkear = Tuesday", t: 11 },
+        { khmer: "ថ្ងៃពុធ", english: "Wednesday", meaning: "Tngai Put = Wednesday", t: 17 },
+        { khmer: "ថ្ងៃព្រហស្បតិ៍", english: "Thursday", meaning: "Tngai Prohoas = Thursday", t: 22 },
+        { khmer: "ថ្ងៃសុក្រ", english: "Friday", meaning: "Tngai Sok = Friday", t: 30 },
+        { khmer: "ថ្ងៃសៅរ៍", english: "Saturday", meaning: "Tngai Sau = Saturday", t: 36 },
+        { khmer: "ថ្ងៃអាទិត្យ", english: "Sunday", meaning: "Tngai Artit = Sunday", t: 43 },
+        { khmer: "ចុងសប្តាហ៍", english: "Weekend", meaning: "Chong Sabda = Weekend", t: 49 }
+      ]
+    },
+    {
+      title: "Food in Khmer",
+      artist: "ម្ហូបអាហារ · Khmer Food",
+      ytid: "QF_2vhdSFOo",
+      ytstart: 0,
+      lyrics: [
+        { khmer: "បាយ", english: "Rice", meaning: "Bai = Rice", t: 0 },
+        { khmer: "សម្លរ", english: "Soup", meaning: "Samlor = Soup", t: 11 },
+        { khmer: "ត្រីចៀន", english: "Fried fish", meaning: "Trei Chean = Fried fish", t: 23 },
+        { khmer: "មាន់អាំង", english: "Roast chicken", meaning: "Moan Ang = Roast chicken", t: 34 },
+        { khmer: "សាច់គោអាំង", english: "Steak", meaning: "Sach Ko Ang = Steak", t: 47 },
+        { khmer: "សាច់អាំង", english: "BBQ", meaning: "Sach Ang = BBQ", t: 60 },
+        { khmer: "សាច់ក្រក", english: "Sausage", meaning: "Sach Krok = Sausage", t: 72 },
+        { khmer: "មាន់炒", english: "Chicken fried", meaning: "Moan Chao = Fried chicken", t: 83 },
+        { khmer: "ដំឡូងបំពង", english: "French fries", meaning: "Damlong Bampong = French fries", t: 96 }
+      ]
+    },
+    {
+      title: "Khmer Essentials",
+      artist: "ភាសាខ្មែរ · Essential Phrases",
+      ytid: "BSvdpT_FiUo",
+      ytstart: 7,
+      lyrics: [
+        { khmer: "សួស្តី", english: "Hello", meaning: "Soo-sday = Hello", t: 0 },
+        { khmer: "លាហើយ", english: "Goodbye", meaning: "Lea hay = Goodbye", t: 7 },
+        { khmer: "អរគុណ", english: "Thank you", meaning: "Or-koon = Thank you", t: 15 },
+        { khmer: "សុំទោស", english: "Sorry", meaning: "Som-toh = Sorry", t: 22 },
+        { khmer: "បាទ", english: "Yes", meaning: "Bart = Yes (male) / Jas (female)", t: 30 },
+        { khmer: "អត់ទេ", english: "No", meaning: "Ot tay = No", t: 37 },
+        { khmer: "ខ្ញុំមិនយល់ទេ", english: "I don't understand", meaning: "Kh-nyom min yohl tay", t: 45 },
+        { khmer: "ថ្លៃប៉ុន្មាន?", english: "How much?", meaning: "Tlay pon-man = How much?", t: 53 },
+        { khmer: "នៅឯណា?", english: "Where is it?", meaning: "Now ae na = Where is it?", t: 62 },
+        { khmer: "បត់ឆ្វេង", english: "Turn left", meaning: "Bot chh-veng = Turn left", t: 71 },
+        { khmer: "បត់ស្តាំ", english: "Turn right", meaning: "Bot sdam = Turn right", t: 78 },
+        { khmer: "ឈប់ទីនេះ", english: "Stop here", meaning: "Chhob ti nih = Stop here", t: 87 }
+      ]
+    },
+    {
+      title: "Food & Drink",
+      artist: "ម្ហូប និងភេសជ្ជៈ · Essential Phrases",
+      ytid: "F0XT8f5iw9Y",
+      ytstart: 0,
+      lyrics: [
+        { khmer: "ខ្ញុំឃ្លាន", english: "I'm hungry", meaning: "Kh-nyom khlean = I'm hungry", t: 5 },
+        { khmer: "ខ្ញុំស្រេកទឹក", english: "I'm thirsty", meaning: "Kh-nyom srek teuk = I'm thirsty", t: 13 },
+        { khmer: "ឆ្ងាញ់ណាស់!", english: "Delicious!", meaning: "Chh-nganh nas = Delicious!", t: 20 },
+        { khmer: "សូមកុំហឹរ", english: "Not spicy please", meaning: "Som kom heh = Not spicy please", t: 28 },
+        { khmer: "ទឹក", english: "Water", meaning: "Teuk = Water", t: 36 },
+        { khmer: "ស្រាបៀរ", english: "Beer", meaning: "Sraa-beer = Beer", t: 44 },
+        { khmer: "សូមគិតលុយ", english: "The bill please", meaning: "Som kit loo-y = The bill please", t: 51 }
+      ]
+    },
+    {
+      title: "Colours in Khmer",
+      artist: "ពណ៌ · Khmer Colours",
+      ytid: "wsul4reg3Uc",
+      ytstart: 0,
+      lyrics: [
+        { khmer: "ពោរលឿង", english: "Yellow", meaning: "por leung = Yellow", t: 0 },
+        { khmer: "ពោរទឹកក្រូច", english: "Orange", meaning: "por tuk krouch = Orange", t: 7 },
+        { khmer: "ពោរក្រហម", english: "Red", meaning: "por krah-hahm = Red", t: 15 },
+        { khmer: "ផ្កាឈូក", english: "Pink", meaning: "phka chhuk = Pink", t: 22 },
+        { khmer: "ពោរបៃតង", english: "Green", meaning: "por bai-tong = Green", t: 30 },
+        { khmer: "ពោរប្រាក់", english: "Silver", meaning: "por brak = Silver", t: 37 },
+        { khmer: "ពោរស", english: "White", meaning: "por so = White", t: 44 },
+        { khmer: "ពោរត្នោត", english: "Brown", meaning: "por tnaot = Brown", t: 52 },
+        { khmer: "ពោរខ្មៅ", english: "Black", meaning: "por khmao = Black", t: 59 }
+      ]
+    },
+  ]
+,
+  basics: [
+    {
+      title: "Numbers 1 to 10",
+      artist: "ចំនួន ១ ដល់ ១០ · Khmer Numbers",
+      ytid: "V-rHNp3Z154",
+      ytstart: 0,
+      lyrics: [
+        { khmer: "១ — មួយ", english: "One", meaning: "muoy = One", t: 0 },
+        { khmer: "២ — ពីរ", english: "Two", meaning: "pii = Two", t: 5 },
+        { khmer: "៣ — បី", english: "Three", meaning: "bei = Three", t: 10 },
+        { khmer: "៤ — បួន", english: "Four", meaning: "buon = Four", t: 15 },
+        { khmer: "៥ — ប្រាំ", english: "Five", meaning: "pram = Five", t: 20 },
+        { khmer: "៦ — ប្រាំមួយ", english: "Six", meaning: "pram muoy = Six", t: 26 },
+        { khmer: "៧ — ប្រាំពីរ", english: "Seven", meaning: "pram pii = Seven", t: 31 },
+        { khmer: "៨ — ប្រាំបី", english: "Eight", meaning: "pram bei = Eight", t: 36 },
+        { khmer: "៩ — ប្រាំបួន", english: "Nine", meaning: "pram buon = Nine", t: 41 },
+        { khmer: "១០ — ដប់", english: "Ten", meaning: "dop = Ten", t: 47 }
+      ]
+    },
+    {
+      title: "Days of the Week",
+      artist: "ថ្ងៃក្នុងសប្តាហ៍ · Khmer Days",
+      ytid: "Znr2Tn4Xlnk",
+      ytstart: 0,
+      lyrics: [
+        { khmer: "ថ្ងៃ", english: "Day", meaning: "Tngai = Day", t: 0 },
+        { khmer: "ថ្ងៃចន្ទ", english: "Monday", meaning: "Tngai Chan = Monday", t: 5 },
+        { khmer: "ថ្ងៃអង្គារ", english: "Tuesday", meaning: "Tngai Angkear = Tuesday", t: 11 },
+        { khmer: "ថ្ងៃពុធ", english: "Wednesday", meaning: "Tngai Put = Wednesday", t: 17 },
+        { khmer: "ថ្ងៃព្រហស្បតិ៍", english: "Thursday", meaning: "Tngai Prohoas = Thursday", t: 22 },
+        { khmer: "ថ្ងៃសុក្រ", english: "Friday", meaning: "Tngai Sok = Friday", t: 30 },
+        { khmer: "ថ្ងៃសៅរ៍", english: "Saturday", meaning: "Tngai Sau = Saturday", t: 36 },
+        { khmer: "ថ្ងៃអាទិត្យ", english: "Sunday", meaning: "Tngai Artit = Sunday", t: 43 },
+        { khmer: "ចុងសប្តាហ៍", english: "Weekend", meaning: "Chong Sabda = Weekend", t: 49 }
+      ]
+    },
+    {
+      title: "Food in Khmer",
+      artist: "ម្ហូបអាហារ · Khmer Food",
+      ytid: "QF_2vhdSFOo",
+      ytstart: 0,
+      lyrics: [
+        { khmer: "បាយ", english: "Rice", meaning: "Bai = Rice", t: 0 },
+        { khmer: "សម្លរ", english: "Soup", meaning: "Samlor = Soup", t: 11 },
+        { khmer: "ត្រីចៀន", english: "Fried fish", meaning: "Trei Chean = Fried fish", t: 23 },
+        { khmer: "មាន់អាំង", english: "Roast chicken", meaning: "Moan Ang = Roast chicken", t: 34 },
+        { khmer: "សាច់គោអាំង", english: "Steak", meaning: "Sach Ko Ang = Steak", t: 47 },
+        { khmer: "សាច់អាំង", english: "BBQ", meaning: "Sach Ang = BBQ", t: 60 },
+        { khmer: "សាច់ក្រក", english: "Sausage", meaning: "Sach Krok = Sausage", t: 72 },
+        { khmer: "មាន់炒", english: "Chicken fried", meaning: "Moan Chao = Fried chicken", t: 83 },
+        { khmer: "ដំឡូងបំពង", english: "French fries", meaning: "Damlong Bampong = French fries", t: 96 }
+      ]
+    },
+    {
+      title: "Khmer Essentials",
+      artist: "ភាសាខ្មែរ · Essential Phrases",
+      ytid: "BSvdpT_FiUo",
+      ytstart: 7,
+      lyrics: [
+        { khmer: "សួស្តី", english: "Hello", meaning: "Soo-sday = Hello", t: 0 },
+        { khmer: "លាហើយ", english: "Goodbye", meaning: "Lea hay = Goodbye", t: 7 },
+        { khmer: "អរគុណ", english: "Thank you", meaning: "Or-koon = Thank you", t: 15 },
+        { khmer: "សុំទោស", english: "Sorry", meaning: "Som-toh = Sorry", t: 22 },
+        { khmer: "បាទ", english: "Yes", meaning: "Bart = Yes (male) / Jas (female)", t: 30 },
+        { khmer: "អត់ទេ", english: "No", meaning: "Ot tay = No", t: 37 },
+        { khmer: "ខ្ញុំមិនយល់ទេ", english: "I don't understand", meaning: "Kh-nyom min yohl tay", t: 45 },
+        { khmer: "ថ្លៃប៉ុន្មាន?", english: "How much?", meaning: "Tlay pon-man = How much?", t: 53 },
+        { khmer: "នៅឯណា?", english: "Where is it?", meaning: "Now ae na = Where is it?", t: 62 },
+        { khmer: "បត់ឆ្វេង", english: "Turn left", meaning: "Bot chh-veng = Turn left", t: 71 },
+        { khmer: "បត់ស្តាំ", english: "Turn right", meaning: "Bot sdam = Turn right", t: 78 },
+        { khmer: "ឈប់ទីនេះ", english: "Stop here", meaning: "Chhob ti nih = Stop here", t: 87 }
+      ]
+    },
+    {
+      title: "Food & Drink",
+      artist: "ម្ហូប និងភេសជ្ជៈ · Essential Phrases",
+      ytid: "F0XT8f5iw9Y",
+      ytstart: 0,
+      lyrics: [
+        { khmer: "ខ្ញុំឃ្លាន", english: "I'm hungry", meaning: "Kh-nyom khlean = I'm hungry", t: 5 },
+        { khmer: "ខ្ញុំស្រេកទឹក", english: "I'm thirsty", meaning: "Kh-nyom srek teuk = I'm thirsty", t: 13 },
+        { khmer: "ឆ្ងាញ់ណាស់!", english: "Delicious!", meaning: "Chh-nganh nas = Delicious!", t: 20 },
+        { khmer: "សូមកុំហឹរ", english: "Not spicy please", meaning: "Som kom heh = Not spicy please", t: 28 },
+        { khmer: "ទឹក", english: "Water", meaning: "Teuk = Water", t: 36 },
+        { khmer: "ស្រាបៀរ", english: "Beer", meaning: "Sraa-beer = Beer", t: 44 },
+        { khmer: "សូមគិតលុយ", english: "The bill please", meaning: "Som kit loo-y = The bill please", t: 51 }
+      ]
+    },
+    {
+      title: "Colours in Khmer",
+      artist: "ពណ៌ · Khmer Colours",
+      ytid: "wsul4reg3Uc",
+      ytstart: 0,
+      lyrics: [
+        { khmer: "ពោរលឿង", english: "Yellow", meaning: "por leung = Yellow", t: 0 },
+        { khmer: "ពោរទឹកក្រូច", english: "Orange", meaning: "por tuk krouch = Orange", t: 7 },
+        { khmer: "ពោរក្រហម", english: "Red", meaning: "por krah-hahm = Red", t: 15 },
+        { khmer: "ផ្កាឈូក", english: "Pink", meaning: "phka chhuk = Pink", t: 22 },
+        { khmer: "ពោរបៃតង", english: "Green", meaning: "por bai-tong = Green", t: 30 },
+        { khmer: "ពោរប្រាក់", english: "Silver", meaning: "por brak = Silver", t: 37 },
+        { khmer: "ពោរស", english: "White", meaning: "por so = White", t: 44 },
+        { khmer: "ពោរត្នោត", english: "Brown", meaning: "por tnaot = Brown", t: 52 },
+        { khmer: "ពោរខ្មៅ", english: "Black", meaning: "por khmao = Black", t: 59 }
+      ]
+    }
+  ]
+
+};
+
+var state = {
+  khmer:  { current: -1, playing: false, timer: null, songIndex: 0, startTime: 0 },
+  kids:   { current: -1, playing: false, timer: null, songIndex: 0, startTime: 0 },
+  basics: { current: -1, playing: false, timer: null, songIndex: 0, startTime: 0 }
+};
+var INTERVAL = 4200;
+
+function hasTimestamps(type, idx) {
+  return songs[type][idx].lyrics[0].t !== undefined;
+}
+
+function tickTimestamp(type) {
+  var s = state[type];
+  var lyrs = songs[type][s.songIndex].lyrics;
+  var elapsed;
+
+  var ytstart = songs[type][s.songIndex].ytstart || 0;
+  if (type === 'kids' && kidsPlayer && kidsPlayer.getCurrentTime) {
+    elapsed = kidsPlayer.getCurrentTime() - ytstart;
+  } else if (type === 'basics' && basicsPlayer && basicsPlayer.getCurrentTime) {
+    elapsed = basicsPlayer.getCurrentTime() - ytstart;
+  } else {
+    elapsed = (Date.now() - s.startTime) / 1000;
+  }
+
+  var newLine = -1;
+  for (var i = 0; i < lyrs.length; i++) {
+    if (elapsed >= lyrs[i].t) newLine = i;
+  }
+  if (newLine !== s.current) {
+    s.current = newLine;
+    highlightLine(type, newLine, lyrs.length);
+  }
+  var lastT = lyrs[lyrs.length-1].t;
+  if (newLine === lyrs.length - 1 && elapsed >= lastT + 8) {
+    clearInterval(s.timer);
+    s.playing = false;
+    var btn = document.getElementById(type + '-btn');
+    btn.textContent = type === 'basics' ? '▶ Listen Again!' : '▶ Sing Again!';
+    btn.classList.remove('playing');
+  }
+}
+
+function highlightLine(type, n, total) {
+  for (var i = 0; i < total; i++) {
+    var el = document.getElementById(type + '-line-' + i);
+    if (!el) continue;
+    el.classList.remove('active', 'sung');
+    if (i === n) el.classList.add('active');
+    else if (i < n) el.classList.add('sung');
+  }
+  if (n >= 0) {
+    var active = document.getElementById(type + '-line-' + n);
+    if (active) {
+      var container = active.parentElement;
+      var lineTop = active.offsetTop;
+      var lineHeight = active.offsetHeight;
+      var containerHeight = container.offsetHeight;
+      container.scrollTop = lineTop - (containerHeight / 2) + (lineHeight / 2);
+    }
+  }
+  var pct = n < 0 ? 0 : Math.round(((n + 1) / total) * 100);
+  document.getElementById(type + '-progress').style.width = pct + '%';
+}
+
+function showMain(tab) {
+  // Stop ALL playing audio when switching tabs
+  var textMap = { kids: '▶ Sing Along!', basics: '▶ Listen & Learn!', khmer: '▶ Sing Along!' };
+  ['khmer','kids'].forEach(function(type) {
+    if (state[type] && state[type].playing) {
+      clearInterval(state[type].timer);
+      state[type].playing = false;
+      var btn = document.getElementById(type + '-btn');
+      if (btn) { btn.textContent = textMap[type] || '▶ Play'; btn.classList.remove('playing'); }
+    }
+  });
+  if (kidsPlayer) kidsPlayer.pauseVideo();
+
+
+var tabs = ['phrases','quiz','premium','about'];
+  tabs.forEach(function(t) {
+    var panel = document.getElementById('panel-' + t);
+    if (panel) panel.classList.toggle('visible', t === tab);
+    var btn = document.getElementById('mtab-' + t);
+    if (btn) btn.classList.toggle('active', t === tab);
+  });
+  // Reset phrases view when switching to phrases tab
+  if (tab === 'phrases') {
+    document.getElementById('phrases-categories').style.display = 'block';
+    document.getElementById('phrases-list').style.display = 'none';
+    document.getElementById('phrase-player').style.display = 'none';
+    var pv = document.getElementById('phrase-video');
+    if (pv) pv.pause();
+  }
+  // Reset quiz when switching to quiz tab
+  if (tab === 'quiz') {
+    document.getElementById('quiz-start').style.display = 'block';
+    document.getElementById('quiz-question').style.display = 'none';
+    document.getElementById('quiz-score').style.display = 'none';
+  }
+}
+
+function openPlayer(type, idx) {
+  var s = songs[type][idx];
+  state[type].songIndex = idx;
+  state[type].current = -1;
+  state[type].playing = false;
+  clearInterval(state[type].timer);
+
+  document.getElementById(type + '-list').style.display = 'none';
+  var player = document.getElementById(type + '-player');
+  player.classList.add('visible');
+
+  document.getElementById(type + '-player-title').textContent = s.title;
+  document.getElementById(type + '-player-artist').textContent = s.artist;
+
+  var start = s.ytstart ? '&start=' + s.ytstart : '';
+  if (type === 'kids') {
+    if (kidsPlayer) {
+      kidsPlayer.loadVideoById({ videoId: s.ytid, startSeconds: s.ytstart || 0 });
+      kidsPlayer.pauseVideo();
+    } else {
+      pendingKidsVideo = { videoId: s.ytid, startSeconds: s.ytstart || 0 };
+    }
+  } else if (type === 'basics') {
+    if (basicsPlayer) {
+      basicsPlayer.loadVideoById({ videoId: s.ytid, startSeconds: s.ytstart || 0 });
+      basicsPlayer.pauseVideo();
+    } else {
+      pendingBasicsVideo = { videoId: s.ytid, startSeconds: s.ytstart || 0 };
+    }
+  } else {
+    document.getElementById(type + '-iframe').src = 'https://www.youtube.com/embed/' + s.ytid + '?rel=0&playsinline=1' + start;
+  }
+
+  document.getElementById(type + '-progress').style.width = '0%';
+  document.getElementById(type + '-btn').classList.remove('playing');
+
+  renderLyrics(type, idx);
+}
+
+function goToList(type) {
+  clearInterval(state[type].timer);
+  state[type].playing = false;
+  state[type].current = -1;
+  state[type].startTime = 0;
+  if (type === 'kids' && kidsPlayer) kidsPlayer.stopVideo();
+  else if (type === 'basics' && basicsPlayer) basicsPlayer.stopVideo();
+  else { var iframe = document.getElementById(type + '-iframe'); if(iframe) iframe.src = ''; }
+  var btnText = type === 'basics' ? '▶ Listen & Learn!' : (type === 'comedy' ? '▶ Watch & Learn!' : '▶ Sing Along!');
+  document.getElementById(type + '-btn').textContent = btnText;
+  document.getElementById(type + '-btn').classList.remove('playing');
+  document.getElementById(type + '-player').classList.remove('visible');
+  document.getElementById(type + '-list').style.display = 'flex';
+}
+
+function closePlayer(type) {
+  var idx = state[type].songIndex;
+  clearInterval(state[type].timer);
+  state[type].playing = false;
+  state[type].current = -1;
+  state[type].startTime = 0;
+  if (type === 'kids') {
+    if (kidsPlayer) {
+      kidsPlayer.seekTo(songs.kids[idx].ytstart || 0, true);
+      kidsPlayer.pauseVideo();
+    }
+  } else if (type === 'basics') {
+    if (basicsPlayer) {
+      basicsPlayer.seekTo(songs.basics[idx].ytstart || 0, true);
+      basicsPlayer.pauseVideo();
+    }
+  } else {
+    var s = songs[type][idx];
+    var start = s.ytstart ? '&start=' + s.ytstart : '';
+    document.getElementById(type + '-iframe').src = 'https://www.youtube.com/embed/' + s.ytid + '?rel=0&playsinline=1' + start;
+  }
+  document.getElementById(type + '-btn').textContent = '▶ Sing Along!';
+  document.getElementById(type + '-btn').classList.remove('playing');
+  document.getElementById(type + '-progress').style.width = '0%';
+  renderLyrics(type, idx);
+  var lyricsContainer = document.getElementById(type + '-lyrics');
+  if (lyricsContainer) lyricsContainer.scrollTop = 0;
+}
+
+function renderLyrics(type, idx) {
+  var container = document.getElementById(type + '-lyrics');
+  container.innerHTML = '';
+  var lyrs = songs[type][idx].lyrics;
+  lyrs.forEach(function(l, i) {
+    var div = document.createElement('div');
+    div.className = 'lyric-line';
+    div.id = type + '-line-' + i;
+    var primary = window.learningLang === 'english' ? (l.english || '') : (l.khmer || l.english || '');
+    var secondary = window.learningLang === 'english' ? (l.khmer || '') : (l.english || '');
+    var primaryClass = window.learningLang === 'english' ? 'english' : 'khmer';
+    div.innerHTML = '<div class="' + primaryClass + '">' + primary + '</div>' +
+                    (secondary ? '<div class="' + (window.learningLang === 'english' ? 'khmer' : 'english') + '">' + secondary + '</div>' : '') +
+                    (l.meaning ? '<div class="meaning">' + l.meaning + '</div>' : '');
+    container.appendChild(div);
+  });
+}
+
+function updateLine(type, n) {
+  var lyrs = songs[type][state[type].songIndex].lyrics;
+  for (var i = 0; i < lyrs.length; i++) {
+    var el = document.getElementById(type + '-line-' + i);
+    if (!el) continue;
+    el.classList.remove('active','sung');
+    if (i === n) el.classList.add('active');
+    else if (i < n) el.classList.add('sung');
+  }
+  if (n >= 0) {
+    var a = document.getElementById(type + '-line-' + n);
+    if (a) a.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  var pct = n < 0 ? 0 : Math.round(((n + 1) / lyrs.length) * 100);
+  document.getElementById(type + '-progress').style.width = pct + '%';
+}
+
+function toggleSing(type) {
+  var btn = document.getElementById(type + '-btn');
+  var s = state[type];
+  var singText = type === 'basics' ? '▶ Listen & Learn!' : '▶ Sing Along!';
+  if (!s.playing) {
+    btn.textContent = '⏸ Pause';
+    btn.classList.add('playing');
+    if (type === 'basics' && basicsPlayer) basicsPlayer.playVideo();
+    s.playing = true;
+    if (hasTimestamps(type, s.songIndex)) {
+        s.timer = setInterval(function() { tickTimestamp(type); }, 250);
+    } else {
+      advanceLine(type);
+      s.timer = setInterval(function() { advanceLine(type); }, INTERVAL);
+    }
+  } else {
+    s.playing = false;
+    btn.textContent = singText;
+    btn.classList.remove('playing');
+    clearInterval(s.timer);
+    if (type === 'basics' && basicsPlayer) basicsPlayer.pauseVideo();
+  }
+}
+
+function advanceLine(type) {
+  var s = state[type];
+  var lyrs = songs[type][s.songIndex].lyrics;
+  if (s.current < lyrs.length - 1) {
+    s.current++;
+    updateLine(type, s.current);
+  } else {
+    clearInterval(s.timer);
+    s.playing = false;
+    var btn = document.getElementById(type + '-btn');
+    btn.textContent = type === 'basics' ? '▶ Listen Again!' : '▶ Sing Again!';
+    btn.classList.remove('playing');
+  }
+}
+
+function resetSing(type) {
+  var s = state[type];
+  clearInterval(s.timer);
+  s.playing = false;
+  s.current = -1;
+  s.startTime = 0;
+  updateLine(type, -1);
+  var btn = document.getElementById(type + '-btn');
+  btn.textContent = '▶ Sing Along!';
+  btn.classList.remove('playing');
+
+}
+
+
+
+function openYouTube() {
+  var btn = document.getElementById('kids-yt-btn');
+  var ytid = btn.dataset.ytid;
+  var start = btn.dataset.ytstart || 0;
+  window.open('https://www.youtube.com/watch?v=' + ytid + '&t=' + start + 's', '_blank');
+}
+
+function toggleSingKids() {
+  var type = 'kids';
+  var btn = document.getElementById(type + '-btn');
+  var s = state[type];
+  if (!s.playing) {
+    s.playing = true;
+    btn.textContent = '⏸ Pause';
+    btn.classList.add('playing');
+    if (kidsPlayer) kidsPlayer.playVideo();
+    // Poll actual video time - no countdown needed
+    if (hasTimestamps(type, s.songIndex)) {
+      s.timer = setInterval(function() { tickTimestamp(type); }, 250);
+    } else {
+      advanceLine(type);
+      s.timer = setInterval(function() { advanceLine(type); }, INTERVAL);
+    }
+  } else {
+    s.playing = false;
+    btn.textContent = '▶ Sing Along!';
+    btn.classList.remove('playing');
+    clearInterval(s.timer);
+    if (kidsPlayer) kidsPlayer.pauseVideo();
+  }
+}
+
+function startCountdown(type, callback) {
+  var overlay = document.getElementById(type + '-countdown');
+  var numEl = document.getElementById(type + '-count-num');
+  if (!overlay || !numEl) { callback(); return; }
+  var count = 3;
+  numEl.textContent = count;
+  overlay.classList.add('active');
+  var interval = setInterval(function() {
+    count--;
+    if (count > 0) {
+      numEl.textContent = count;
+    } else {
+      clearInterval(interval);
+      overlay.classList.remove('active');
+      callback();
+    }
+  }, 1000);
+}
+
+
+// Language mode
+window.learningLang = 'khmer'; // default
+
+function setLang(lang) {
+  window.learningLang = lang;
+  document.getElementById('lang-overlay').style.display = 'none';
+  var flag = document.getElementById('lang-flag');
+  var label = document.getElementById('lang-label');
+  if (lang === 'english') {
+    flag.textContent = '🇬🇧';
+    label.textContent = 'Learning English';
+  } else {
+    flag.textContent = '🇰🇭';
+    label.textContent = 'Learning Khmer';
+  }
+  // Re-render any open lyrics
+  ['khmer','kids'].forEach(function(type) {
+    var idx = state[type].songIndex;
+    var player = document.getElementById(type + '-player');
+    if (player && player.classList.contains('visible')) {
+      renderLyrics(type, idx);
+    }
+  });
+}
+
+var kidsPlayer = null;
+var pendingKidsVideo = null;
+
+function onYouTubeIframeAPIReady() {
+  kidsPlayer = new YT.Player('kids-yt-player', {
+    height: '100%',
+    width: '100%',
+    videoId: '8EoFayAcxUY',
+    playerVars: { rel: 0, playsinline: 1, modestbranding: 1 },
+    events: {
+      onReady: function() {
+        if (pendingKidsVideo) {
+          kidsPlayer.loadVideoById(pendingKidsVideo);
+          kidsPlayer.pauseVideo();
+          pendingKidsVideo = null;
+        }
+      }
+    }
+  });
+  basicsPlayer = new YT.Player('basics-yt-player', {
+    height: '100%',
+    width: '100%',
+    videoId: 'V-rHNp3Z154',
+    playerVars: { rel: 0, playsinline: 1, modestbranding: 1 },
+    events: {
+      onReady: function() {
+        if (pendingBasicsVideo) {
+          basicsPlayer.loadVideoById(pendingBasicsVideo);
+          basicsPlayer.pauseVideo();
+          pendingBasicsVideo = null;
+        }
+      }
+    }
+  });
+  // Comedy player initialised lazily when tab is first opened
+}
+
+
+var phrases = {}; // loaded dynamically
+// phrase data loaded from Google Sheets
+
+var currentCategory = null;
+var baseMediaURL = "https://raw.githubusercontent.com/Mickalacki/talktuktuk/main/";
+
+var catLabels = {
+  greetings:"👋 Start & Simple Talk", food:"🍜 Food & Drink", transport:"🛺 Getting Around",
+  social:"🤝 Social", numbers:"🔢 Numbers", days:"📅 Days", colours:"🎨 Colours"
+};
+
+function openCategory(cat) {
+  currentCategory = cat;
+  document.getElementById('phrases-categories').style.display = 'none';
+  document.getElementById('phrase-player').style.display = 'none';
+
+  // Fully reset phrases-list
+  var phrasesList = document.getElementById('phrases-list');
+  phrasesList.innerHTML = '';
+
+  // Add back button
+  var back = document.createElement('div');
+  back.style.cssText = 'margin:12px 12px 4px;';
+  back.innerHTML = '<button class="player-back" style="background:rgba(255,255,255,0.15);color:white;border:none;border-radius:20px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;" onclick="closeCategory()">← Categories</button><div style="font-family:Fredoka One,cursive;font-size:18px;color:white;margin-top:8px;padding-left:4px;">' + catLabels[cat] + '</div>';
+  phrasesList.appendChild(back);
+
+  // Add phrase cards
+  var list = document.createElement('div');
+  list.className = 'song-list';
+  list.id = 'phrase-cards';
+  var items = phrases[cat];
+  items.forEach(function(p) {
+    var div = document.createElement('div');
+    div.className = 'song-item';
+    var catIcons = {greetings:'👋',food:'🍜',transport:'🛺',social:'💬',numbers:'🔢',days:'📅',colours:'🎨'};
+    var catColors = {greetings:'#FFD600',food:'#FF8F00',transport:'#1565C0',social:'#2E7D32',numbers:'#6A1B9A',days:'#00838F',colours:'#AD1457'};
+    var icon = catIcons[cat] || '🔊';
+    var color = catColors[cat] || '#1565C0';
+    var khmerText = p.khmer ? '<div style="font-size:12px;color:var(--muted);margin-top:2px;font-family:Khmer,sans-serif;">' + p.khmer + '</div>' : '';
+    div.innerHTML = '<div class="song-item-header"><div class="song-badge" style="background:' + color + ';font-size:20px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">' + icon + '</div><div><div class="song-info-title">' + p.english + '</div>' + khmerText + '</div><div class="song-arrow">▶</div></div>';
+    div.onclick = (function(phrase) { return function() { openPhrase(phrase); }; })(p);
+    list.appendChild(div);
+  });
+  phrasesList.appendChild(list);
+  phrasesList.style.display = 'block';
+}
+
+function closeCategory() {
+  document.getElementById('phrases-list').style.display = 'none';
+  document.getElementById('phrase-player').style.display = 'none';
+  document.getElementById('phrases-categories').style.display = 'block';
+  document.getElementById('phrase-cards').innerHTML = '';
+  currentCategory = null;
+}
+
+function openPhrase(p) {
+  document.getElementById('phrases-list').style.display = 'none';
+  var isEnglish = window.learningLang === 'english';
+  document.getElementById('phrase-player-title').textContent = isEnglish ? p.english : p.english;
+  if (isEnglish) {
+    document.getElementById('phrase-khmer').textContent = p.english;
+    document.getElementById('phrase-khmer').style.color = '#1565C0';
+    document.getElementById('phrase-english').textContent = p.khmer;
+    document.getElementById('phrase-phonetic').textContent = p.phonetic;
+  } else {
+    document.getElementById('phrase-khmer').textContent = p.khmer;
+    document.getElementById('phrase-khmer').style.color = '#1565C0';
+    document.getElementById('phrase-english').textContent = p.english;
+    document.getElementById('phrase-phonetic').textContent = p.phonetic;
+  }
+  var video = document.getElementById('phrase-video');
+  document.getElementById('phrase-video-src').src = baseMediaURL + p.id + '.mp4';
+  video.load();
+  video.play();
+  document.getElementById('phrase-player').style.display = 'block';
+}
+
+function closePhrasePlayer() {
+  var video = document.getElementById('phrase-video');
+  video.pause();
+  document.getElementById('phrase-player').style.display = 'none';
+  document.getElementById('phrases-list').style.display = 'block';
+}
+
+
+function openKidsSongs() {
+  document.getElementById('phrases-categories').style.display = 'none';
+  document.getElementById('phrases-list').style.display = 'none';
+  document.getElementById('phrase-player').style.display = 'none';
+
+  var phrasesList = document.getElementById('phrases-list');
+  phrasesList.innerHTML = '';
+
+  var back = document.createElement('div');
+  back.style.cssText = 'margin:12px 12px 4px;';
+  back.innerHTML = '<button class="player-back" style="background:rgba(255,255,255,0.15);color:white;border:none;border-radius:20px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;" onclick="closeKidsSongsToCategories()">← Categories</button><div style="font-family:Fredoka One,cursive;font-size:18px;color:white;margin-top:8px;padding-left:4px;">👶 Kids Songs</div>';
+  phrasesList.appendChild(back);
+
+  var list = document.createElement('div');
+  list.className = 'song-list';
+  list.id = 'phrase-cards';
+
+  var kidsSongsList = [
+    { title: 'Twinkle Twinkle Little Star', sub: 'ពន្លឺផ្កាយតូច · Beginner', idx: 0 },
+    { title: "My Grandpa's Farm", sub: 'Khmer Old MacDonald · Beginner', idx: 1 }
+  ];
+
+  kidsSongsList.forEach(function(s) {
+    var div = document.createElement('div');
+    div.className = 'song-item';
+    div.innerHTML = '<div class="song-item-header"><div class="song-badge badge-kids" style="background:#4CAF50;font-size:18px;width:38px;height:38px;">' + (s.idx + 1) + '</div><div><div class="song-info-title">' + s.title + '</div><div class="song-info-sub">' + s.sub + '</div></div><div class="song-arrow">▶</div></div>';
+    div.onclick = (function(idx) { return function() { openKidsSong(idx); }; })(s.idx);
+    list.appendChild(div);
+  });
+
+  phrasesList.appendChild(list);
+  phrasesList.style.display = 'block';
+}
+
+function closeKidsSongsToCategories() {
+  document.getElementById('phrases-list').style.display = 'none';
+  document.getElementById('phrases-list').innerHTML = '<div class="song-list" id="phrase-cards"></div>';
+  document.getElementById('phrases-categories').style.display = 'block';
+}
+
+function openKidsSong(idx) {
+  document.getElementById('phrases-list').style.display = 'none';
+  document.getElementById('panel-kids').style.display = 'block';
+  document.getElementById('panel-kids').classList.add('visible');
+  var existing = document.getElementById('kids-back-btn');
+  if (existing) existing.remove();
+  var back = document.createElement('div');
+  back.id = 'kids-back-btn';
+  back.style.cssText = 'margin:12px 12px 4px;';
+  back.innerHTML = '<button class="player-back" style="background:rgba(255,255,255,0.15);color:white;border:none;border-radius:20px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;" onclick="backToKidsSongsList()">← Kids Songs</button>';
+  document.getElementById('panel-kids').insertBefore(back, document.getElementById('panel-kids').firstChild);
+  openPlayer('kids', idx);
+}
+
+function backToKidsSongsList() {
+  var backBtn = document.getElementById('kids-back-btn');
+  if (backBtn) backBtn.remove();
+  if (kidsPlayer) kidsPlayer.pauseVideo();
+  clearInterval(state['kids'].timer);
+  state['kids'].playing = false;
+  state['kids'].current = -1;
+  document.getElementById('panel-kids').classList.remove('visible');
+  document.getElementById('panel-kids').style.display = 'none';
+  document.getElementById('kids-player').classList.remove('visible');
+  document.getElementById('kids-list').style.display = 'flex';
+  openKidsSongs();
+}
+
+var CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQm2y2b_Jnxuu_PUxIpFGlI4-jIvfdoQxSidqSUMDJ6PK9EQAFRXLB9ybl8lUjFgwWoBgvBdImTx4wZ/pub?gid=465524934&single=true&output=csv';
+var baseMediaURL = 'https://raw.githubusercontent.com/Mickalacki/talktuktuk/main/';
+var PREMIUM_CSV_URL = 'https://docs.google.com/spreadsheets/d/1r0zUrrBSaQMlnYqFl3ezz8_U3wq7w_sDTrK8j7Wuc2Q/export?format=csv&gid=0';
+var PREMIUM_AUDIO_BASE = 'https://raw.githubusercontent.com/Mickalacki/talktuktuk-premium/main/';
+  var SHOW_PREMIUM = false;
+var premiumPhrases = {};
+function parseCSVLine(line) {
+  var fields = [];
+  var current = '';
+  var inQuotes = false;
+  for (var c = 0; c < line.length; c++) {
+    var ch = line[c];
+    if (ch === '"') {
+      inQuotes = !inQuotes;
+    } else if (ch === ',' && !inQuotes) {
+      fields.push(current.replace(/^"|"$/g, '').trim());
+      current = '';
+    } else {
+      current += ch;
+    }
+  }
+  fields.push(current.replace(/^"|"$/g, '').trim());
+  return fields;
+}
+
+function parseCSV(csv) {
+  var lines = csv.trim().split('\n');
+  var headers = parseCSVLine(lines[0]);
+  var rows = [];
+  for (var i = 1; i < lines.length; i++) {
+    if (!lines[i].trim()) continue;
+    var fields = parseCSVLine(lines[i]);
+    var row = {};
+    headers.forEach(function(h, idx) {
+      row[h] = (fields[idx] || '').trim();
+    });
+    rows.push(row);
+  }
+  return rows;
+}
+function loadPremiumPhrases() {
+  fetch(PREMIUM_CSV_URL)
+    .then(function(r) {
+      if (!r.ok) throw new Error('Premium CSV failed');
+      return r.text();
+    })
+    .then(function(csv) {
+      var rows = parseCSV(csv);
+      console.log('RAW CSV ROWS:', rows.length);
+      console.log('RAW ROW COUNT:', rows.length);
+
+      premiumPhrases = buildPhrasesFromCSV(rows);
+      console.log('Premium loaded');
+    })
+    .catch(function(err) {
+      console.warn('Premium load failed:', err.message);
+    });
+}
+function buildPhrasesFromCSV(rows) {
+  var built = {};
+  // Map all possible category names from the sheet
+  var catMap = {
+   'Greetings': 'greetings', 'greetings': 'greetings',
+'Food & Drink': 'food', 'Food': 'food', 'food': 'food',
+'Getting Around': 'transport', 'Transport': 'transport', 'transport': 'transport',
+'Social': 'social', 'social': 'social',
+'Numbers': 'numbers', 'numbers': 'numbers',
+'Days': 'days', 'days': 'days',
+
+'Colours': 'colours', 'Colors': 'colours', 'colours': 'colours',
+
+'Fun Phrases': 'funphrases',
+'fun phrases': 'funphrases',
+'funphrases': 'funphrases'
+};
+  rows.forEach(function(row) {
+    if (!row.PhraseID || !row.English) return;
+    var rawCat = (row.Category || '').trim();
+    var cat = catMap[rawCat];
+    if (!cat) return;
+    if (!built[cat]) built[cat] = [];
+    built[cat].push({
+      id: row.PhraseID.trim(),
+      english: row.English.trim(),
+      khmer: (row.Khmer || '').trim(),
+      phonetic: (row.KhmerPhonetic || '').trim()
+    });
+  });
+  return built;
+}
+
+function loadPhrases() {
+  // Try direct fetch first
+  fetch(CSV_URL)
+    .then(function(r) {
+      if (!r.ok) throw new Error('Status ' + r.status);
+      return r.text();
+    })
+    .then(function(csv) {
+    var rows = parseCSV(csv);
+var loaded = buildPhrasesFromCSV(rows);
+
+/* 🔍 ADD THIS BLOCK RIGHT HERE */
+console.log('ROWS FROM CSV:', rows.length);
+console.log('CATEGORY KEYS:', Object.keys(loaded));
+console.log('CATEGORY BREAKDOWN:', Object.keys(loaded).map(function(k){
+  return k + ':' + loaded[k].length;
+}));
+
+// Only use if we got actual data
+if (Object.keys(loaded).length > 0) {
+  phrases = loaded;
+  var total = Object.values(loaded).reduce(function(a,b){return a+b.length;},0);
+  console.log('Loaded ' + total + ' phrases from Google Sheets');
+  initApp('Google Sheets live (' + total + ' phrases)');
+} else {
+  throw new Error('No phrases parsed');
+}
+    })
+    .catch(function(err) {
+      console.warn('CSV load failed:', err.message);
+      // Try CORS proxy as fallback
+      var proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(CSV_URL);
+      fetch(proxyUrl)
+        .then(function(r) { return r.text(); })
+        .then(function(csv) {
+          var rows = parseCSV(csv);
+          var loaded = buildPhrasesFromCSV(rows);
+          if (Object.keys(loaded).length > 0) {
+            phrases = loaded;
+            var total = Object.values(loaded).reduce(function(a,b){return a+b.length;},0);
+            console.log('Loaded via proxy: ' + total + ' phrases');
+            initApp('Google Sheets via proxy (' + total + ' phrases)');
+          } else {
+            throw new Error('Proxy also failed');
+          }
+        })
+        .catch(function(err2) {
+          console.warn('All fetch attempts failed:', err2.message);
+          phrases = {};
+          document.getElementById('loading-screen').innerHTML = '<div style="text-align:center;padding:20px;color:white;"><div style="font-size:48px;margin-bottom:16px;">⚠️</div><div style="font-family:Fredoka One,cursive;font-size:22px;margin-bottom:12px;">Could not load phrases</div><div style="font-size:14px;opacity:0.7;margin-bottom:20px;">Please check your internet connection and try again.</div><button onclick="location.reload()" style="background:var(--yellow);border:none;border-radius:30px;padding:12px 28px;font-family:Fredoka One,cursive;font-size:18px;cursor:pointer;">Try Again</button></div>';
+        });
+    });
+}
+
+function initApp(source) {
+  document.getElementById('loading-screen').style.display = 'none';
+  updateCategoryCounts();
+  document.getElementById('lang-overlay').style.display = 'flex';
+}
+
+function updateCategoryCounts() {
+  var catInfo = {
+    greetings: { el: 'cat-sub-greetings', preview: function(p) { return p.slice(0,2).map(function(x){return x.english;}).join(', ') + '...'; } },
+    food:      { el: 'cat-sub-food',      preview: function(p) { return p.slice(0,3).map(function(x){return x.english;}).join(', ') + '...'; } },
+    transport: { el: 'cat-sub-transport', preview: function(p) { return p.slice(0,2).map(function(x){return x.english;}).join(', ') + '...'; } },
+    social:    { el: 'cat-sub-social',    preview: function(p) { return p.slice(0,2).map(function(x){return x.english;}).join(', ') + '...'; } },
+    numbers:   { el: 'cat-sub-numbers',   preview: function(p) { return p.length + ' numbers'; } },
+    days:      { el: 'cat-sub-days',      preview: function(p) { return p.slice(0,2).map(function(x){return x.english;}).join(', ') + '...'; } },
+    colours:   { el: 'cat-sub-colours',   preview: function(p) { return p.slice(0,3).map(function(x){return x.english;}).join(', ') + '...'; } }
+  };
+  Object.keys(catInfo).forEach(function(cat) {
+    var el = document.getElementById(catInfo[cat].el);
+    if (!el || !phrases[cat]) return;
+    var count = phrases[cat].length;
+    el.textContent = count + ' phrases · ' + catInfo[cat].preview(phrases[cat]);
+  });
+}
+
+// Start loading
+loadPhrases();
+loadPremiumPhrases();
+// ===== QUIZ =====
+var quizSelectedCat = 'all';
+var quizQuestions = [];
+var quizCurrentIdx = 0;
+var quizScore = 0;
+var quizAnswered = false;
+
+function selectQuizCat(btn) {
+  document.querySelectorAll('.quiz-cat-btn').forEach(function(b) { b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  quizSelectedCat = btn.getAttribute('data-cat');
+  startQuiz();
+}
+
+function getAllPhrases() {
+  var all = [];
+  Object.keys(phrases).forEach(function(cat) {
+    phrases[cat].forEach(function(p) {
+      var copy = Object.assign({}, p);
+      copy.cat = cat;
+      all.push(copy);
+    });
+  });
+  return all;
+}
+
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+
+function startQuiz() {
+  var pool;
+  if (quizSelectedCat === 'all') {
+    pool = getAllPhrases();
+  } else {
+    pool = phrases[quizSelectedCat].map(function(p) { return Object.assign({}, p, {cat: quizSelectedCat}); });
+  }
+  quizQuestions = shuffle(pool).slice(0, Math.min(10, pool.length));
+  quizCurrentIdx = 0;
+  quizScore = 0;
+  document.getElementById('quiz-start').style.display = 'none';
+  document.getElementById('quiz-score').style.display = 'none';
+  document.getElementById('quiz-question').style.display = 'block';
+  showQuestion();
+}
+
+function showQuestion() {
+  quizAnswered = false;
+  var q = quizQuestions[quizCurrentIdx];
+  var total = quizQuestions.length;
+
+  document.getElementById('quiz-progress-bar').style.width = ((quizCurrentIdx / total) * 100) + '%';
+  document.getElementById('quiz-q-num').textContent = 'Question ' + (quizCurrentIdx + 1) + ' of ' + total;
+  document.getElementById('quiz-next-wrap').style.display = 'none';
+
+  document.getElementById('quiz-q-text').textContent = q.khmer;
+  document.getElementById('quiz-q-sub').textContent = q.phonetic;
+
+  var qCat = q.cat || quizSelectedCat;
+  var wrongPool;
+  if (quizSelectedCat === 'all') {
+    // All categories: wrong answers from DIFFERENT categories - more interesting!
+    var otherPool = getAllPhrases().filter(function(p) { return p.id !== q.id && p.cat !== qCat; });
+    wrongPool = shuffle(otherPool).slice(0, 3);
+  } else {
+    // Single category: wrong answers from SAME category - harder!
+    var samePool = phrases[qCat] ? phrases[qCat].filter(function(p) { return p.id !== q.id; }) : [];
+    wrongPool = shuffle(samePool);
+    if (wrongPool.length < 3) {
+      var padPool = getAllPhrases().filter(function(p) { return p.id !== q.id && p.cat !== qCat; });
+      wrongPool = wrongPool.concat(shuffle(padPool)).slice(0, 3);
+    } else {
+      wrongPool = wrongPool.slice(0, 3);
+    }
+  }
+
+  var options = shuffle([q].concat(wrongPool));
+  var container = document.getElementById('quiz-options');
+  container.innerHTML = '';
+  options.forEach(function(opt) {
+    var btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = opt.english;
+    btn.onclick = (function(b, correct, correctEng) { return function() { answerQuestion(b, correct, correctEng); }; })(btn, opt.id === q.id, q.english);
+    container.appendChild(btn);
+  });
+}
+
+function answerQuestion(btn, isCorrect, correctEnglish) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  var opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach(function(b) { b.classList.add('disabled'); b.onclick = null; });
+  if (isCorrect) {
+    btn.classList.add('correct');
+    quizScore++;
+  } else {
+    btn.classList.add('wrong');
+    opts.forEach(function(b) {
+      if (b.textContent === correctEnglish) b.classList.add('reveal');
+    });
+  }
+  document.getElementById('quiz-next-wrap').style.display = 'block';
+}
+
+function nextQuestion() {
+  quizCurrentIdx++;
+  if (quizCurrentIdx >= quizQuestions.length) {
+    showScore();
+  } else {
+    showQuestion();
+  }
+}
+
+function showScore() {
+  document.getElementById('quiz-question').style.display = 'none';
+  document.getElementById('quiz-score').style.display = 'block';
+  var total = quizQuestions.length;
+  var pct = Math.round((quizScore / total) * 100);
+  document.getElementById('quiz-score-num').textContent = quizScore + ' / ' + total;
+  var emoji, label;
+  if (pct === 100) {
+    emoji = '🛺👑';
+    label = 'TUK TUK LEGEND! You nailed it — the locals will think you grew up here!';
+  } else if (pct >= 70) {
+    emoji = '🇰🇭😎';
+    label = 'ALMOST LOCAL! A few more rides in the tuk tuk and you will be fluent!';
+  } else if (pct >= 40) {
+    emoji = '📚🛺';
+    label = 'NEEDS MORE PRACTICE! Jump back in the tuk tuk and keep learning!';
+  } else {
+    emoji = '😅🛺';
+    label = 'NEEDS MORE PRACTICE! Even the tuk tuk driver is confused — keep going!';
+  }
+  document.getElementById('quiz-score-emoji').textContent = emoji;
+  document.getElementById('quiz-score-label').textContent = label;
+  document.getElementById('quiz-progress-bar').style.width = '100%';
+}
+
+function restartQuiz() {
+  document.getElementById('quiz-score').style.display = 'none';
+  startQuiz();
+}
+
+</script>
+</body>
+</html>
