@@ -1889,7 +1889,11 @@ function restartQuiz() {
   startQuiz();
 }
 function openManorSection(section) {
-  alert("Manor information coming next");
+  document.getElementById('manor-home').style.display = 'none';
+
+  if (section === 'breakfast') {
+    document.getElementById('manor-breakfast').style.display = 'block';
+  }
 }
 
 function enterTTT() {
