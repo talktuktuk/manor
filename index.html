@@ -421,6 +421,34 @@ html, body { font-family: 'Nunito', sans-serif; background: var(--dark); min-hei
 
 </div>
 
+<div id="manor-food" class="manor-section">
+
+  <button onclick="closeManorSection()">← Back to Manor</button>
+
+  <h2>🍔 Food & Delivery</h2>
+
+  <p>Want something different? Order food delivered directly to The Manor.</p>
+
+  <a href="https://food.grab.com/kh/en/" target="_blank"
+     style="display:block;text-decoration:none;">
+    <button style="width:100%;background:#00B14F;color:white;">
+      🟢 ORDER WITH GRAB
+    </button>
+  </a>
+
+  <a href="https://www.foodpanda.com.kh/" target="_blank"
+     style="display:block;text-decoration:none;">
+    <button style="width:100%;background:#D70F64;color:white;">
+      🩷 ORDER WITH FOODPANDA
+    </button>
+  </a>
+
+  <p style="margin-top:25px;font-size:14px;opacity:0.8;">
+    Delivery availability and fees depend on your location and the restaurant.
+  </p>
+
+</div>
+
 <div class="app">
 
 <div class="header">
@@ -1971,6 +1999,7 @@ function enterTTT() {
 function closeManorSection() {
   document.getElementById('manor-breakfast').style.display = 'none';
   document.getElementById('manor-barn').style.display = 'none';
+  document.getElementById('manor-food').style.display = 'none';
   document.getElementById('manor-home').style.display = 'flex';
   document.querySelector('.app').style.display = 'none';
   window.scrollTo(0, 0);
