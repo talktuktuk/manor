@@ -1952,6 +1952,10 @@ function openManorSection(section) {
   if (section === 'breakfast') {
     document.getElementById('manor-breakfast').style.display = 'block';
   }
+
+  if (section === 'barn') {
+    document.getElementById('manor-barn').style.display = 'block';
+  }
 }
 
 function enterTTT() {
@@ -1963,9 +1967,9 @@ function enterTTT() {
   }
 
   showMain('phrases');
-}
-  function closeManorSection() {
+function closeManorSection() {
   document.getElementById('manor-breakfast').style.display = 'none';
+  document.getElementById('manor-barn').style.display = 'none';
   document.getElementById('manor-home').style.display = 'flex';
   document.querySelector('.app').style.display = 'none';
   window.scrollTo(0, 0);
