@@ -1813,7 +1813,20 @@ function restartQuiz() {
   document.getElementById('quiz-score').style.display = 'none';
   startQuiz();
 }
+function openManorSection(section) {
+  alert("Manor information coming next");
+}
 
+function enterTTT() {
+  document.getElementById('manor-home').style.display = 'none';
+
+  var app = document.querySelector('.app');
+  if (app) {
+    app.style.display = 'block';
+  }
+
+  showMain('phrases');
+}
 </script>
 </body>
 </html>
