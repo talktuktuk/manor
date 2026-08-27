@@ -315,7 +315,7 @@ html, body { font-family: 'Nunito', sans-serif; background: var(--dark); min-hei
 
   <button onclick="openManorSection('breakfast')">🍳 Breakfast</button>
   <button onclick="openManorSection('barn')">🍺 The Barn · Bar · Restaurant · Pool</button>
-  <button onclick="openManorSection('food')">🍔 Food & Delivery</button>
+<button onclick="openManorSection('food')">🍔 Food & Delivery</button>
   <button onclick="openManorSection('wifi')">📶 WiFi</button>
   <button onclick="openManorSection('shop')">🛍️ Reception Shop</button>
   <button onclick="enterTTT()">🇰🇭 Learn Khmer with Talk Tuk Tuk</button>
@@ -1973,6 +1973,7 @@ function restartQuiz() {
   document.getElementById('quiz-score').style.display = 'none';
   startQuiz();
 }
+
 function openManorSection(section) {
   document.getElementById('manor-home').style.display = 'none';
 
@@ -1983,9 +1984,15 @@ function openManorSection(section) {
   if (section === 'barn') {
     document.getElementById('manor-barn').style.display = 'block';
   }
+
+  if (section === 'food') {
+    document.getElementById('manor-food').style.display = 'block';
+  }
+
 }
 
 function enterTTT() {
+
   document.getElementById('manor-home').style.display = 'none';
 
   var app = document.querySelector('.app');
