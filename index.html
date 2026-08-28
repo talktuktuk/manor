@@ -141,16 +141,17 @@ html, body { font-family: 'Nunito', sans-serif; background: var(--dark); min-hei
   margin-bottom: 10px;
 }
 
-.manor-section p {
-  margin: 12px 0;
-  line-height: 1.6;
-}
-
 .manor-section ul {
   list-style: none;
   padding: 0;
   margin-top: 15px;
 }
+
+@media (max-width: 600px) {
+  .manor-home > button {
+    text-align: center !important;
+  }
+
   
 /* HEADER */
 .header { background: var(--yellow); padding: 18px 20px 14px; display: flex; align-items: center; gap: 12px; position: relative; }
