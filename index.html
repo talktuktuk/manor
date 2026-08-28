@@ -28,82 +28,93 @@
 html, body { font-family: 'Nunito', sans-serif; background: var(--dark); min-height: 100vh; -webkit-font-smoothing: antialiased; }
 .app { display: none; max-width: 480px; margin: 0 auto; padding-bottom: 48px; }
 /* MANOR HOME */
+
 .manor-home {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
   padding: 30px 20px 50px;
-  background: #1a1a2e;
-  color: white;
+  background: #f4eee4;
+  color: #3b3028;
   text-align: center;
 }
 
 .manor-logo {
-  width: 110px;
-  height: 110px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.15);
 }
 
 .manor-home h1 {
   font-size: 32px;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
+  color: #3b3028;
 }
 
 .manor-home h2 {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
+  color: #6b5545;
 }
 
 .manor-welcome {
+  width: 100%;
   max-width: 430px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 20px;
-  line-height: 1.5;
+  background: #fffaf3;
+  border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 22px;
+  line-height: 1.6;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
 .manor-welcome h3 {
-  color: #FFD600;
-  font-size: 22px;
+  color: #7a573d;
+  font-size: 23px;
   margin-bottom: 12px;
 }
 
 .manor-welcome p {
-  margin-bottom: 8px;
+  margin-bottom: 9px;
 }
 
 .manor-home > button {
   width: 100%;
   max-width: 430px;
   border: none;
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: 14px;
+  padding: 16px 18px;
   margin: 6px 0;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  background: #FFD600;
-  color: #1a1a2e;
+  background: #ffffff;
+  color: #3b3028;
+  text-align: left;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
 }
 
 .manor-home > button:last-child {
-  background: #1565C0;
+  background: #3b3028;
   color: white;
+  text-align: center;
 }
 
+
 /* MANOR INFORMATION SECTIONS */
+
 .manor-section {
   display: none;
   min-height: 100vh;
   padding: 25px 20px 50px;
-  background: #1a1a2e;
-  color: white;
-  text-align: center;
+  background: #f4eee4;
+  color: #3b3028;
+  text-align: left;
 }
 
 .manor-section button {
@@ -114,22 +125,26 @@ html, body { font-family: 'Nunito', sans-serif; background: var(--dark); min-hei
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
+  background: #3b3028;
+  color: white;
 }
 
 .manor-section h2 {
-  color: #FFD600;
+  color: #7a573d;
   font-size: 28px;
   margin-bottom: 20px;
 }
 
 .manor-section h3 {
+  color: #5a4436;
   font-size: 20px;
-  margin-bottom: 12px;
+  margin-top: 22px;
+  margin-bottom: 10px;
 }
 
 .manor-section p {
   margin: 12px 0;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .manor-section ul {
@@ -137,12 +152,6 @@ html, body { font-family: 'Nunito', sans-serif; background: var(--dark); min-hei
   padding: 0;
   margin-top: 15px;
 }
-
-.manor-section li {
-  background: rgba(255,255,255,0.08);
-  padding: 10px;
-  margin: 6px 0;
-  border-radius: 8px;
 }
 /* HEADER */
 .header { background: var(--yellow); padding: 18px 20px 14px; display: flex; align-items: center; gap: 12px; position: relative; }
