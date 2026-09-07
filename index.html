@@ -181,6 +181,34 @@ html, body { font-family: 'Nunito', sans-serif; background: var(--dark); min-hei
   margin-top: 15px;
 }
 
+/* MANOR MENU CARD EFFECT */
+
+.manor-home > button {
+  position: relative;
+  overflow: hidden;
+  min-height: 58px;
+  letter-spacing: 0.2px;
+}
+
+.manor-home > button::after {
+  content: "›";
+  position: absolute;
+  right: 18px;
+  font-size: 25px;
+  font-weight: 400;
+  color: #b89468;
+  top: 50%;
+  transform: translateY(-52%);
+}
+
+.manor-home > button:last-child::after {
+  color: #ffffff;
+}
+
+.manor-home > button:active {
+  transform: scale(0.98);
+}
+
 @media (max-width: 600px) {
   .manor-home > button {
     text-align: center !important;
@@ -243,10 +271,31 @@ html, body { font-family: 'Nunito', sans-serif; background: var(--dark); min-hei
   flex-shrink: 0;
   box-shadow: 0 3px 10px rgba(90, 65, 45, 0.15);
 }
+/* MANOR INFORMATION CARDS */
 
-/* CHARITY BANNER */
-.charity-banner { background: var(--red); padding: 8px 16px; text-align: center; font-size: 11px; font-weight: 700; color: white; letter-spacing: 0.5px; }
-.charity-banner a { color: var(--yellow); text-decoration: none; }
+.manor-section p,
+.manor-section li {
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.manor-section li {
+  background: #fffdf9;
+  border: 1px solid #e5d9cc;
+  border-radius: 12px;
+  padding: 13px 15px;
+  margin-bottom: 9px;
+  box-shadow: 0 2px 8px rgba(70, 50, 35, 0.05);
+}
+
+.manor-section p {
+  color: #5b4b3e;
+  margin-bottom: 14px;
+}
+
+.manor-section strong {
+  color: #6f4f38;
+}
 
 /* MAIN NAV */
 .main-nav { display: flex; margin: 14px 12px 0; gap: 6px; }
