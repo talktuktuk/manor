@@ -153,12 +153,61 @@ html, body { font-family: 'Nunito', sans-serif; background: var(--dark); min-hei
   }
 
   
-/* HEADER */
-.header { background: var(--yellow); padding: 18px 20px 14px; display: flex; align-items: center; gap: 12px; position: relative; }
-.header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--red), var(--pink), var(--blue), var(--red)); }
-.header-title { font-family: 'Fredoka One', cursive; font-size: 28px; color: var(--dark); line-height: 1; letter-spacing: 1px; }
-.header-sub { font-size: 11px; color: #444; font-weight: 700; margin-top: 3px; text-transform: uppercase; letter-spacing: 1.5px; }
-.mic-icon { width: 46px; height: 46px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+/* MANOR BOUTIQUE HEADER */
+
+.header {
+  background: #fffaf3;
+  padding: 22px 20px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  border-bottom: 1px solid #e4d5c4;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55px;
+  height: 3px;
+  background: #b89468;
+  border-radius: 3px;
+}
+
+.header-title {
+  font-family: Georgia, serif;
+  font-size: 27px;
+  font-weight: 600;
+  color: #6f4f38;
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+}
+
+.header-sub {
+  font-size: 10px;
+  color: #8a7563;
+  font-weight: 600;
+  margin-top: 5px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.mic-icon {
+  width: 48px;
+  height: 48px;
+  background: #b89468;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(90, 65, 45, 0.15);
+}
 
 /* CHARITY BANNER */
 .charity-banner { background: var(--red); padding: 8px 16px; text-align: center; font-size: 11px; font-weight: 700; color: white; letter-spacing: 0.5px; }
