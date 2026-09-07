@@ -296,7 +296,39 @@ html, body { font-family: 'Nunito', sans-serif; background: var(--dark); min-hei
 .manor-section strong {
   color: #6f4f38;
 }
+/* MANOR MENU FINISH */
 
+.manor-home > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 62px;
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.manor-home > button::before {
+  content: "◆";
+  position: absolute;
+  left: 18px;
+  font-size: 9px;
+  color: #b89468;
+}
+
+.manor-home > button::after {
+  content: "›";
+  position: absolute;
+  right: 18px;
+  font-size: 25px;
+  font-weight: 400;
+  color: #b89468;
+}
+
+.manor-home > button:last-child::before,
+.manor-home > button:last-child::after {
+  color: #ffffff;
+}
 
 </style>
 <script src="https://www.youtube.com/iframe_api"></script>
