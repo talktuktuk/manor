@@ -34,111 +34,145 @@ html, body { font-family: 'Nunito', sans-serif; background: var(--dark); min-hei
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  padding: 30px 20px 50px;
-  background: #f4eee4;
-  color: #3b3028;
+  padding: 28px 20px 55px;
+  background: #f7f1e8;
+  color: #4b3b30;
   text-align: center;
 }
 
 .manor-logo {
-  width: 180px;
+  width: 190px;
   height: auto;
-  max-height: 120px;
+  max-height: 125px;
   object-fit: contain;
-  margin-bottom: 12px;
-  box-shadow: 0 5px 18px rgba(0,0,0,0.15);
+  margin-bottom: 14px;
+  filter: drop-shadow(0 5px 10px rgba(70, 50, 35, 0.12));
 }
 
 .manor-home h1 {
+  font-family: Georgia, serif;
   font-size: 32px;
-  margin-bottom: 5px;
-  color: #3b3028;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #6f4f38;
+  letter-spacing: 0.3px;
 }
 
 .manor-home h2 {
-  font-size: 18px;
+  font-size: 13px;
   font-weight: 600;
-  margin-bottom: 22px;
-  color: #6b5545;
+  margin-bottom: 24px;
+  color: #9a8069;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
+
+/* WELCOME CARD */
 
 .manor-welcome {
   width: 100%;
   max-width: 430px;
-  background: #fffaf3;
-  border-radius: 18px;
-  padding: 22px;
+  background: #fffdf9;
+  border-radius: 20px;
+  padding: 26px 24px;
   margin-bottom: 22px;
-  line-height: 1.6;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  line-height: 1.65;
+  box-shadow: 0 5px 20px rgba(70, 50, 35, 0.09);
+  border: 1px solid #eadfD2;
 }
 
 .manor-welcome h3 {
-  color: #7a573d;
+  color: #6f4f38;
+  font-family: Georgia, serif;
   font-size: 23px;
-  margin-bottom: 12px;
+  font-weight: 600;
+  margin-bottom: 13px;
 }
 
 .manor-welcome p {
   margin-bottom: 9px;
+  color: #5b4b3e;
 }
+
+/* HOME MENU */
 
 .manor-home > button {
   width: 100%;
   max-width: 430px;
-  border: none;
-  border-radius: 14px;
-  padding: 16px 18px;
+  border: 1px solid #e3d6c7;
+  border-radius: 16px;
+  padding: 17px 18px;
   margin: 6px 0;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
-  background: #ffffff;
-  color: #3b3028;
+  background: #fffdf9;
+  color: #4b3b30;
   text-align: center;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 3px 12px rgba(70, 50, 35, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.manor-home > button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(70, 50, 35, 0.12);
 }
 
 .manor-home > button:last-child {
-  background: #FFD600;
-  color: #1a1a2e;
-  text-align: center;
+  background: #b89468;
+  color: white;
+  border: none;
 }
 
-/* MANOR INFORMATION SECTIONS */
+/* INFORMATION SECTIONS */
 
 .manor-section {
   display: none;
   min-height: 100vh;
-  padding: 25px 20px 50px;
-  background: #f4eee4;
-  color: #3b3028;
+  padding: 30px 20px 55px;
+  background: #f7f1e8;
+  color: #4b3b30;
   text-align: left;
 }
 
 .manor-section button {
-  border: none;
-  border-radius: 10px;
-  padding: 12px 18px;
-  margin-bottom: 25px;
-  font-size: 16px;
-  font-weight: 700;
+  border: 1px solid #d9c9b8;
+  border-radius: 12px;
+  padding: 11px 18px;
+  margin-bottom: 28px;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  background: #3b3028;
-  color: white;
+  background: #fffdf9;
+  color: #6f4f38;
+  box-shadow: 0 2px 8px rgba(70, 50, 35, 0.06);
 }
 
 .manor-section h2 {
-  color: #7a573d;
-  font-size: 28px;
-  margin-bottom: 20px;
+  color: #6f4f38;
+  font-family: Georgia, serif;
+  font-size: 29px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.manor-section h2::after {
+  content: "";
+  display: block;
+  width: 45px;
+  height: 2px;
+  background: #b89468;
+  margin: 12px auto 0;
+  border-radius: 2px;
 }
 
 .manor-section h3 {
-  color: #5a4436;
+  color: #7a573d;
   font-size: 20px;
-  margin-top: 22px;
-  margin-bottom: 10px;
+  font-weight: 600;
+  margin-top: 25px;
+  margin-bottom: 11px;
 }
 
 .manor-section ul {
@@ -151,6 +185,7 @@ html, body { font-family: 'Nunito', sans-serif; background: var(--dark); min-hei
   .manor-home > button {
     text-align: center !important;
   }
+}
 
   
 /* MANOR BOUTIQUE HEADER */
